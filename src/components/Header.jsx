@@ -4,10 +4,29 @@ import { ChevronDown, ArrowRight, Menu, X, Phone } from 'lucide-react';
 import './Header.css';
 
 const NAV_ITEMS = [
-  { label: 'What we do', path: '#what-we-do' },
-  { label: 'Where we work', path: '#where-we-work' },
-  { label: 'Selected work', path: '#selected-work' },
-  { label: 'Contact', path: '#contact' },
+  {
+    label: 'Solutions',
+    path: '/solutions',
+    children: [
+      { label: 'University e-Governance (UMS)', desc: 'State-wide admissions, CBCS & examinations', path: '/solutions#e-governance' },
+      { label: 'College & Autonomous ERP (CMS)', desc: 'Elective engines, smart cards & attendance', path: '/solutions#college' },
+      { label: 'K-12 School Management (SMS)', desc: 'Parent apps, GPS bus tracking & fees', path: '/solutions#school' },
+    ]
+  },
+  {
+    label: 'Services',
+    path: '/services',
+    children: [
+      { label: 'Cloud Infrastructure', desc: 'AWS, Azure & on-premise deployments', path: '/cloud-services' },
+      { label: 'AI Healthcare Research', desc: 'Clinical imaging & diagnostic models', path: '/ai-healthcare' },
+      { label: 'Data Migration & Integration', desc: 'Legacy data cleansing & API pipelines', path: '/services#sw-int-mig' },
+      { label: 'Tamper-Proof Certificates', desc: 'Cryptographic QR-verified degrees', path: '/services#temper_proof' },
+      { label: 'Mining Telemetry', desc: 'Weighbridge automation & dispatch', path: '/mining' },
+    ]
+  },
+  { label: 'Clients & Cases', path: '/case-studies' },
+  { label: 'About', path: '/about' },
+  { label: 'Contact', path: '/contact' },
 ];
 
 export default function Header() {
@@ -68,12 +87,26 @@ export default function Header() {
               onMouseEnter={() => item.children && handleMouseEnter(item.label)}
               onMouseLeave={item.children ? handleMouseLeave : undefined}
             >
-              <a
-                href={item.path}
-                className="nav-link"
+              <Link
+                to={item.path}
+                className={`nav-link ${isActive(item) ? 'nav-link--active' : ''}`}
               >
                 {item.label}
-              </a>
+                {item.children && <ChevronDown size={13} className="nav-caret" />}
+              </Link>
+
+              {item.children && (
+                <div className={`dropdown ${openDropdown === item.label ? 'dropdown--open' : ''}`}>
+                  <div className="dropdown__list">
+                    {item.children.map((child) => (
+                      <Link key={child.path} to={child.path} className="dropdown__item">
+                        <span className="dropdown__item-label">{child.label}</span>
+                        <span className="dropdown__item-desc">{child.desc}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </nav>
@@ -84,10 +117,10 @@ export default function Header() {
             <Phone size={14} />
             <span>040 2355 4455</span>
           </a>
-          <a href="#contact" className="btn btn--primary btn--sm">
-            Talk to us
+          <Link to="/enquiry" className="btn btn--primary btn--sm">
+            Request Demo
             <ArrowRight size={14} />
-          </a>
+          </Link>
           <button
             type="button"
             className="header__burger"
@@ -113,26 +146,42 @@ export default function Header() {
         <div className="mobile-drawer__body">
           {NAV_ITEMS.map((item) => (
             <div key={item.label}>
-              <a
-                href={item.path}
+              <Link
+                to={item.path}
                 className="mobile-drawer__link"
                 onClick={() => setMobileOpen(false)}
               >
                 {item.label}
-              </a>
+              </Link>
+              {item.children && (
+                <div className="mobile-drawer__sub">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.path}
+                      to={child.path}
+                      className="mobile-drawer__sub-link"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
+          <Link to="/careers" className="mobile-drawer__link" onClick={() => setMobileOpen(false)}>Careers</Link>
+          <Link to="/downloads" className="mobile-drawer__link" onClick={() => setMobileOpen(false)}>Downloads</Link>
         </div>
 
         <div className="mobile-drawer__foot">
-          <a href="#contact" className="btn btn--primary" style={{ width: '100%' }} onClick={() => setMobileOpen(false)}>
-            Talk to us
+          <Link to="/enquiry" className="btn btn--primary" style={{ width: '100%' }} onClick={() => setMobileOpen(false)}>
+            Request Demo
             <ArrowRight size={14} />
-          </a>
+          </Link>
           <p className="mobile-drawer__contact">
             <a href="tel:04023554455">040 2355 4455</a>
             <span> · </span>
-            <a href="mailto:info@ekspertech.com">info@ekspertech.com</a>
+            <a href="mailto:support@ekspertechnologies.in">support@ekspertechnologies.in</a>
           </p>
         </div>
       </div>
