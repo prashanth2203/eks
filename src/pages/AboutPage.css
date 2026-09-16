@@ -1,0 +1,127 @@
+/* ==========================================================================
+   ABOUT PAGE
+   ========================================================================== */
+
+/* Story layout */
+.about__story-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.about__story-text p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--ink-secondary);
+}
+
+.about__story-text strong {
+  color: var(--ink);
+}
+
+.about__story-image {
+  border-radius: var(--r-xl);
+  overflow: hidden;
+}
+
+.about__story-image img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+/* Value icons */
+.about__value-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-md);
+  background: var(--stone-100);
+  color: var(--ember);
+  margin: 0 auto;
+}
+
+/* Timeline */
+.about__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.about__timeline-item {
+  display: flex;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--stone-200);
+}
+
+.about__timeline-item:first-child {
+  border-top: 1px solid var(--stone-200);
+}
+
+.about__timeline-year {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--ember);
+  flex-shrink: 0;
+  width: 64px;
+}
+
+.about__timeline-content h4 {
+  margin-bottom: 4px;
+}
+
+.about__timeline-content p {
+  font-size: 0.9375rem;
+  color: var(--ink-muted);
+}
+
+/* Tech layout */
+.about__tech-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.about__tech-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.about__tech-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9375rem;
+  color: var(--stone-300);
+}
+
+.about__tech-item svg {
+  color: var(--ember);
+  flex-shrink: 0;
+}
+
+.about__tech-visual {
+  border-radius: var(--r-xl);
+  overflow: hidden;
+}
+
+.about__tech-visual img {
+  width: 100%;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about__story-layout,
+  .about__tech-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
