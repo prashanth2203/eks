@@ -1,374 +1,353 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { 
   ArrowRight, 
-  CheckCircle2, 
-  Play, 
+  Cpu, 
+  Database, 
   Building2, 
-  Stethoscope, 
+  Headphones, 
+  Landmark, 
   GraduationCap, 
-  Server, 
-  Brain, 
-  ShieldCheck, 
-  Layers,
-  ChevronRight
+  Pickaxe, 
+  Zap, 
+  Activity, 
+  CheckCircle2, 
+  Mail, 
+  PhoneCall 
 } from 'lucide-react';
-import VideoModal from '../components/VideoModal';
+import ClientStripLogos from '../components/ClientStripLogos';
 import './HomePage.css';
 
 export default function HomePage() {
-  const [videoOpen, setVideoOpen] = useState(false);
-  const [activePillar, setActivePillar] = useState(0);
-  const [visibleSections, setVisibleSections] = useState(new Set());
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
 
-  // Intersection Observer for scroll animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => new Set([...prev, entry.target.id]));
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
-    );
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    document.querySelectorAll('[data-animate]').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  const pillars = [
-    {
-      icon: <Building2 size={20} />,
-      tag: 'State e-Governance',
-      title: 'State Universities & Public Governance',
-      desc: 'Turnkey digital governance for public universities — state-wide admissions, confidential examinations, CBCS, and statutory-compliant finance platforms.',
-      image: '/images/editorial/hero_campus.jpg',
-      stats: [
-        { value: '26,000+', label: 'Students governed' },
-        { value: '76', label: 'PG departments' },
-        { value: '120', label: 'Affiliated colleges' },
-      ],
-      features: [
-        'State-wide online admissions & web counselling',
-        'Central Records Branch (CRB) barcode logistics — 1-hour retrieval',
-        'Complete university lifecycle: entrance to convocation',
-        'Audit-ready double-entry finance with CAG compliance',
-      ],
-      link: '/solutions#e-governance',
-      caseStudy: '/case-studies#uom',
-    },
-    {
-      icon: <Stethoscope size={20} />,
-      tag: 'Healthcare & AI',
-      title: 'Medical Universities & Clinical AI',
-      desc: 'High-security medical university administration, multi-phase NEET counselling engines, and AI-driven clinical research for precision diagnostics.',
-      image: '/images/editorial/medical_institution.jpg',
-      stats: [
-        { value: '15,000+', label: 'Medical seats managed' },
-        { value: '12', label: 'AI diagnostic models' },
-        { value: '100%', label: 'Cryptographic degrees' },
-      ],
-      features: [
-        'Medical admissions & merit ranking engine (MBBS, BDS, AYUSH)',
-        'AI-driven radiology & pathology anomaly detection',
-        'NLP for EHR extraction & clinical document indexing',
-        'Tamper-proof medical degrees with QR verification',
-      ],
-      link: '/ai-healthcare',
-      caseStudy: '/case-studies#mu',
-    },
-    {
-      icon: <GraduationCap size={20} />,
-      tag: 'Higher Education',
-      title: 'Autonomous Colleges & Campus Networks',
-      desc: 'Agile campus management for autonomous colleges, multi-branch school networks, smart-card campuses, and complete K-12 school ERP.',
-      image: '/images/editorial/college_classroom.jpg',
-      stats: [
-        { value: '250+', label: 'Exam sessions' },
-        { value: '50,000+', label: 'Smart cards issued' },
-        { value: 'CBCS', label: 'Fully automated' },
-      ],
-      features: [
-        'Choice Based Credit System with elective allocation',
-        'Confidential exam grading with dummy number masking',
-        'Smart card campus — RFID, turnstiles, fee gateways',
-        'K-12 parent portal, SMS alerts, GPS bus telemetry',
-      ],
-      link: '/solutions#college',
-      caseStudy: '/case-studies#ksv',
-    },
-  ];
-
-  const services = [
-    {
-      icon: <Server size={20} />,
-      title: 'Cloud Infrastructure',
-      desc: 'High-concurrency autoscaling for peak admission and result days. AWS, Azure, and on-premise setups.',
-      link: '/cloud-services',
-    },
-    {
-      icon: <Brain size={20} />,
-      title: 'AI Healthcare Lab',
-      desc: 'Machine learning research for radiology anomaly detection and automated clinical record parsing.',
-      link: '/ai-healthcare',
-    },
-    {
-      icon: <Layers size={20} />,
-      title: 'Data Migration',
-      desc: 'Cleansing legacy databases, deduplicating records, and building reliable real-time API integrations.',
-      link: '/services#sw-int-mig',
-    },
-    {
-      icon: <ShieldCheck size={20} />,
-      title: 'Tamper-Proof Certificates',
-      desc: 'Cryptographically signed degrees with encrypted QR codes for instant global employer verification.',
-      link: '/services#temper_proof',
-    },
-  ];
-
-
-  const clients = [
-    { name: 'University of Mysore', logo: '/images/editorial/mysore_university.jpg' },
-    { name: 'Mangalore University', logo: '/images/mangalore_university_logo.png' },
-    { name: 'Telangana State ITI', logo: '/images/iti_logo.png' },
-    { name: 'Dr. NTR University', logo: '/images/ntr-university-logo.jpg' },
-    { name: 'GNITS Hyderabad', logo: '/images/gnits_logo.png' },
-    { name: 'KSV University', logo: '/images/kadi-client.jpg' },
-  ];
-
-  const currentPillar = pillars[activePillar];
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  };
 
   return (
-    <div className="home">
-      <VideoModal isOpen={videoOpen} onClose={() => setVideoOpen(false)} />
-
-      {/* ===== HERO ===== */}
-      <section className="hero">
+    <div className="homepage-streamlined">
+      {/* 1. HERO */}
+      <section className="hero-compact">
         <div className="container">
-          <div className="hero__layout">
-            <div className="hero__content">
-              <div className="hero__eyebrow">
-                <span className="hero__dot" />
-                Enterprise ERP & Infrastructure
-              </div>
-
-              <h1 className="hero__title">
-                The digital foundation for India's leading enterprises.
-              </h1>
-
-              <p className="hero__desc">
-                From state-wide educational e-governance to mining telemetry, healthcare AI, and robust e-commerce platforms—we engineer mission-critical software for every sector.
-              </p>
-
-              <div className="hero__actions">
-                <Link to="/solutions" className="btn btn--primary btn--lg">
-                  Explore Solutions
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-
-              {/* Metric pills */}
-              <div className="hero__metrics">
-                <div className="hero__metric">
-                  <span className="hero__metric-value">24+ Years</span>
-                  <span className="hero__metric-label">Operational Excellence</span>
-                </div>
-                <div className="hero__metric-divider" />
-                <div className="hero__metric">
-                  <span className="hero__metric-value">50+</span>
-                  <span className="hero__metric-label">Enterprise Modules</span>
-                </div>
-                <div className="hero__metric-divider" />
-                <div className="hero__metric">
-                  <span className="hero__metric-value">100%</span>
-                  <span className="hero__metric-label">Statutory Compliant</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="hero__visual-bento">
-              {/* Top Left: Enterprise Dashboard */}
-              <div className="bento-item bento-item--main">
-                <img src="/images/editorial/platform_dashboard.jpg" alt="Enterprise Dashboard" />
-                <div className="bento-label">
-                  <div className="bento-label-dot" style={{ background: 'var(--ember)' }} />
-                  <span>State e-Governance</span>
-                </div>
-              </div>
-
-              {/* Top Right: University */}
-              <div className="bento-item bento-item--vertical">
-                <img src="/images/editorial/mysore_university.jpg" alt="University Campus" />
-                <div className="bento-label">
-                  <div className="bento-label-dot" style={{ background: '#3b82f6' }} />
-                  <span>Higher Education</span>
-                </div>
-              </div>
-
-              {/* Bottom: Medical/Healthcare */}
-              <div className="bento-item bento-item--horizontal">
-                <img src="/images/editorial/medical_institution.jpg" alt="Medical Research" />
-                <div className="bento-label">
-                  <div className="bento-label-dot" style={{ background: '#10b981' }} />
-                  <span>Clinical AI & Healthcare</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Client logos */}
-          <div className="hero__logos" id="hero-logos" data-animate>
-            <span className="hero__logos-label">Trusted by India's premier institutions</span>
-            <div className="hero__logos-row">
-              {clients.map((c, i) => (
-                <div key={i} className="hero__logo-item">
-                  <img src={c.logo} alt={c.name} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PILLARS ===== */}
-      <section className="section section--beige" id="pillars" data-animate>
-        <div className="container">
-          <div className="section-eyebrow">Specialized Platforms</div>
-          <h2 className="section-title">Built for India's regulatory & campus scale</h2>
-          <p className="section-subtitle" style={{ marginBottom: 48 }}>
-            Three purpose-built suites designed around statutory compliance, not generic one-size-fits-all software.
-          </p>
-
-          {/* Pillar tabs */}
-          <div className="pillars__tabs">
-            {pillars.map((p, i) => (
-              <button
-                key={i}
-                type="button"
-                className={`pillars__tab ${activePillar === i ? 'pillars__tab--active' : ''}`}
-                onClick={() => setActivePillar(i)}
-              >
-                <span className="pillars__tab-icon">{p.icon}</span>
-                <div>
-                  <span className="pillars__tab-title">{p.tag}</span>
-                  <span className="pillars__tab-subtitle">{p.title}</span>
-                </div>
-              </button>
-            ))}
-          </div>
-
-          {/* Active pillar detail */}
-          <div className="pillars__detail" key={activePillar}>
-            <div className="pillars__image-col">
-              <div className="pillars__image-wrap">
-                <img src={currentPillar.image} alt={currentPillar.title} className="pillars__photo" />
-              </div>
-              <div className="pillars__stats">
-                {currentPillar.stats.map((s, i) => (
-                  <div key={i} className="pillars__stat">
-                    <span className="pillars__stat-value">{s.value}</span>
-                    <span className="pillars__stat-label">{s.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pillars__info-col">
-              <div className="chip chip--ember">{currentPillar.tag}</div>
-              <h3 className="pillars__detail-title">{currentPillar.title}</h3>
-              <p className="pillars__detail-desc">{currentPillar.desc}</p>
-
-              <ul className="pillars__features">
-                {currentPillar.features.map((f, i) => (
-                  <li key={i} className="pillars__feature">
-                    <CheckCircle2 size={16} className="pillars__check" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="pillars__actions">
-                <Link to={currentPillar.link} className="btn btn--primary">
-                  Explore Suite
-                  <ArrowRight size={14} />
-                </Link>
-                <Link to={currentPillar.caseStudy} className="btn btn--ghost">
-                  Read Case Study
-                  <ArrowRight size={14} className="btn-arrow" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SERVICES ===== */}
-      <section className="section" id="services-overview" data-animate>
-        <div className="container">
-          <div className="section-header--center">
-            <div className="section-eyebrow" style={{ justifyContent: 'center' }}>Engineering Capabilities</div>
-            <h2 className="section-title">Beyond campus software</h2>
-            <p className="section-subtitle" style={{ marginBottom: 56 }}>
-              Specialized infrastructure services that back every deployment.
+          <div className="hero-compact__content">
+            <h1 className="hero-compact__title">
+              Digital transformation, powered by AI.
+            </h1>
+            <p className="hero-compact__desc">
+              25+ years building mission-critical systems for government, education, mining, energy and healthcare.
             </p>
-          </div>
-
-          <div className="services__grid">
-            {services.map((s, i) => (
-              <Link key={i} to={s.link} className="service-card">
-                <div className="service-card__icon">{s.icon}</div>
-                <h4 className="service-card__title">{s.title}</h4>
-                <p className="service-card__desc">{s.desc}</p>
-                <span className="service-card__link">
-                  Learn more <ArrowRight size={14} className="btn-arrow" />
-                </span>
-              </Link>
-            ))}
+            <div className="hero-compact__actions">
+              <a href="#contact" className="btn btn--primary btn--lg">
+                Talk to us
+                <ArrowRight size={16} />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* 2. CLIENT STRIP (Logos only, no heading, no caption) */}
+      <section className="client-strip-section" aria-label="Client Partners">
+        <ClientStripLogos />
+      </section>
 
-      {/* ===== PLATFORM OVERVIEW ===== */}
-      <section className="section" id="platform" data-animate>
+      {/* 3. WHAT WE DO (Four cards, one line each) */}
+      <section className="section" id="what-we-do">
         <div className="container">
-          <div className="platform__layout">
-            <div className="platform__text">
-              <div className="section-eyebrow">Platform Architecture</div>
-              <h2 className="section-title">One database.<br />Every campus function.</h2>
-              <p className="section-subtitle" style={{ marginBottom: 32 }}>
-                A single centralized database architecture eliminates data silos, ensures real-time consistency, and simplifies compliance audits across every department.
-              </p>
+          <div className="section-head-compact">
+            <div className="section-eyebrow">Capabilities</div>
+            <h2 className="section-title">What we do</h2>
+          </div>
 
-              <div className="platform__stack">
-                <div className="platform__layer">
-                  <span className="platform__layer-tag">Presentation</span>
-                  <span className="platform__layer-desc">Device-independent responsive web & mobile portal</span>
-                </div>
-                <div className="platform__layer platform__layer--highlight">
-                  <span className="platform__layer-tag">Logic & Services</span>
-                  <span className="platform__layer-desc">Spring Framework, Groovy & Grails microservices</span>
-                </div>
-                <div className="platform__layer">
-                  <span className="platform__layer-tag">Persistence</span>
-                  <span className="platform__layer-desc">Hibernate ORM with role-based encryption & audit trail</span>
-                </div>
+          <div className="grid-four">
+            <div className="compact-card">
+              <div className="compact-card__icon">
+                <Cpu size={18} />
               </div>
-
-              <Link to="/solutions" className="btn btn--primary" style={{ marginTop: 32 }}>
-                Technical Deep-Dive
-                <ArrowRight size={14} />
-              </Link>
+              <h3 className="compact-card__title">Digital Transformation</h3>
+              <p className="compact-card__line">
+                Modernising legacy systems into platforms that work.
+              </p>
             </div>
 
-            <div className="platform__visual">
-              <img 
-                src="/images/editorial/platform_dashboard.jpg" 
-                alt="Enterprise platform dashboard" 
-                className="platform__image"
-              />
+            <div className="compact-card">
+              <div className="compact-card__icon">
+                <Database size={18} />
+              </div>
+              <h3 className="compact-card__title">Data &amp; AI</h3>
+              <p className="compact-card__line">
+                Data platforms, analytics and AI built into operations, not bolted on.
+              </p>
+            </div>
+
+            <div className="compact-card">
+              <div className="compact-card__icon">
+                <Building2 size={18} />
+              </div>
+              <h3 className="compact-card__title">Enterprise Platforms</h3>
+              <p className="compact-card__line">
+                ERP, e-Governance and campus management at institutional scale.
+              </p>
+            </div>
+
+            <div className="compact-card">
+              <div className="compact-card__icon">
+                <Headphones size={18} />
+              </div>
+              <h3 className="compact-card__title">Run &amp; Support</h3>
+              <p className="compact-card__line">
+                We stay on after go-live.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. WHERE WE WORK (Five cards, one line each) */}
+      <section className="section section--stone" id="where-we-work">
+        <div className="container">
+          <div className="section-head-compact">
+            <div className="section-eyebrow">Domains</div>
+            <h2 className="section-title">Where we work</h2>
+          </div>
+
+          <div className="grid-five">
+            <div className="compact-card compact-card--elevated">
+              <div className="compact-card__icon">
+                <Landmark size={18} />
+              </div>
+              <h3 className="compact-card__title">Government &amp; e-Governance</h3>
+              <p className="compact-card__line">
+                State departments and public institutions.
+              </p>
+            </div>
+
+            <div className="compact-card compact-card--elevated">
+              <div className="compact-card__icon">
+                <GraduationCap size={18} />
+              </div>
+              <h3 className="compact-card__title">Education</h3>
+              <p className="compact-card__line">
+                ERP and campus management for schools, colleges and institutions.
+              </p>
+            </div>
+
+            <div className="compact-card compact-card--elevated">
+              <div className="compact-card__icon">
+                <Pickaxe size={18} />
+              </div>
+              <h3 className="compact-card__title">Mining</h3>
+              <p className="compact-card__line">
+                NMDC and the public-sector mining ecosystem.
+              </p>
+            </div>
+
+            <div className="compact-card compact-card--elevated">
+              <div className="compact-card__icon">
+                <Zap size={18} />
+              </div>
+              <h3 className="compact-card__title">Energy</h3>
+              <p className="compact-card__line">
+                Technology platforms and infrastructure for energy operations.
+              </p>
+            </div>
+
+            <div className="compact-card compact-card--elevated">
+              <div className="compact-card__icon">
+                <Activity size={18} />
+              </div>
+              <h3 className="compact-card__title">Healthcare</h3>
+              <p className="compact-card__line">
+                Data and AI for US payers and provider organisations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. SELECTED WORK (Three cases, two lines each: problem, what changed) */}
+      <section className="section" id="selected-work">
+        <div className="container">
+          <div className="section-head-compact">
+            <div className="section-eyebrow">Track Record</div>
+            <h2 className="section-title">Selected work</h2>
+          </div>
+
+          <div className="grid-three-cases">
+            {/* Case 1: NMDC */}
+            <div className="case-card">
+              <div className="case-card__header">
+                <span className="case-card__tag">Mining &amp; Public Sector</span>
+                <h3 className="case-card__title">NMDC</h3>
+              </div>
+              <div className="case-card__body">
+                <div className="case-card__line">
+                  <span className="case-card__label">Problem:</span>
+                  <span className="case-card__text">
+                    Manual weighbridge registers and disconnected site logs across remote mining complexes led to audit risks and logistical delays.
+                  </span>
+                </div>
+                <div className="case-card__line">
+                  <span className="case-card__label">What changed:</span>
+                  <span className="case-card__text">
+                    Deployed hardware-integrated automated weighbridges with real-time central telemetry and digital dispatch passes.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Case 2: Greenko */}
+            <div className="case-card">
+              <div className="case-card__header">
+                <span className="case-card__tag">Energy &amp; Infrastructure</span>
+                <h3 className="case-card__title">Greenko</h3>
+              </div>
+              <div className="case-card__body">
+                <div className="case-card__line">
+                  <span className="case-card__label">Problem:</span>
+                  <span className="case-card__text">
+                    Distributed renewable power assets lacked unified real-time monitoring and standardized operational reporting.
+                  </span>
+                </div>
+                <div className="case-card__line">
+                  <span className="case-card__label">What changed:</span>
+                  <span className="case-card__text">
+                    Built integrated telemetry and data platforms unifying generation metrics across plant operations.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Case 3: US Healthcare Engagement */}
+            <div className="case-card">
+              <div className="case-card__header">
+                <span className="case-card__tag">Healthcare, Payers &amp; Providers</span>
+                <h3 className="case-card__title">US Healthcare Engagement</h3>
+              </div>
+              <div className="case-card__body">
+                <div className="case-card__line">
+                  <span className="case-card__label">Problem:</span>
+                  <span className="case-card__text">
+                    Disconnected clinical records and unstructured claims data hindered care coordination and clinical document indexing.
+                  </span>
+                </div>
+                <div className="case-card__line">
+                  <span className="case-card__label">What changed:</span>
+                  <span className="case-card__text">
+                    Implemented clinical data pipelines and NLP models to parse, extract, and standardize EHR records for care teams.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. CONTACT (Name, email, phone. One form or one email link. Nothing else.) */}
+      <section className="section section--beige" id="contact">
+        <div className="container container--narrow">
+          <div className="contact-box">
+            <div className="contact-box__info">
+              <div className="section-eyebrow">Connect</div>
+              <h2 className="section-title">Talk to us</h2>
+              <p className="contact-box__desc">
+                Direct discussion with engineering and delivery leadership.
+              </p>
+
+              <div className="contact-box__direct">
+                <a href="mailto:info@ekspertech.com" className="contact-direct-link">
+                  <Mail size={16} />
+                  <span>info@ekspertech.com</span>
+                </a>
+                <a href="tel:04023554455" className="contact-direct-link">
+                  <PhoneCall size={16} />
+                  <span>040 2355 4455</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="contact-box__form-wrap">
+              {formSubmitted ? (
+                <div className="contact-box__success">
+                  <CheckCircle2 size={32} style={{ color: 'var(--ember)', marginBottom: 12 }} />
+                  <h4>Message received.</h4>
+                  <p>Our engineering team will get back to you shortly.</p>
+                </div>
+              ) : (
+                <form className="contact-compact-form" onSubmit={handleSubmit}>
+                  <div className="form-field">
+                    <label htmlFor="name" className="form-field__label">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      placeholder="Your full name"
+                      className="form-field__input"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="email" className="form-field__label">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      placeholder="name@organization.com"
+                      className="form-field__input"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="phone" className="form-field__label">Phone</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      required
+                      placeholder="+91 98765 43210"
+                      className="form-field__input"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="message" className="form-field__label">Brief requirements (optional)</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={3}
+                      placeholder="Brief note on your project..."
+                      className="form-field__input form-field__textarea"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <button type="submit" className="btn btn--primary" style={{ width: '100%', marginTop: 8 }}>
+                    Send Message
+                    <ArrowRight size={15} />
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>

@@ -54,9 +54,9 @@
   --t-normal: 280ms var(--ease);
   --t-slow: 500ms var(--ease);
 
-  /* Spacing scale */
-  --s-section: clamp(80px, 10vw, 140px);
-  --s-section-sm: clamp(56px, 7vw, 96px);
+  /* Spacing scale - tightened to prevent excessive scrolling */
+  --s-section: clamp(36px, 4vw, 54px);
+  --s-section-sm: clamp(20px, 2.5vw, 32px);
 }
 
 /* ---------- Reset ---------- */

@@ -1,29 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, MapPin, Phone, Mail } from 'lucide-react';
 import './Footer.css';
 
-const SOLUTIONS = [
-  { label: 'University e-Governance', path: '/solutions#e-governance' },
-  { label: 'College & Autonomous ERP', path: '/solutions#college' },
-  { label: 'K-12 School Management', path: '/solutions#school' },
-  { label: 'Examination System', path: '/solutions#examination' },
-  { label: 'CBCS Engine', path: '/solutions#cbcs' },
+const WHAT_WE_DO = [
+  { label: 'Digital Transformation', path: '/#what-we-do' },
+  { label: 'Data & AI', path: '/#what-we-do' },
+  { label: 'Enterprise Platforms', path: '/#what-we-do' },
+  { label: 'Run & Support', path: '/#what-we-do' },
 ];
 
-const SERVICES = [
-  { label: 'Cloud Infrastructure', path: '/cloud-services' },
-  { label: 'AI Healthcare', path: '/ai-healthcare' },
-  { label: 'Data Migration', path: '/services#sw-int-mig' },
-  { label: 'Tamper-Proof Certificates', path: '/services#temper_proof' },
-  { label: 'Mining Telemetry', path: '/mining' },
+const WHERE_WE_WORK = [
+  { label: 'Government & e-Governance', path: '/#where-we-work' },
+  { label: 'Education', path: '/#where-we-work' },
+  { label: 'Mining', path: '/#where-we-work' },
+  { label: 'Energy', path: '/#where-we-work' },
+  { label: 'Healthcare', path: '/#where-we-work' },
 ];
 
-const COMPANY = [
-  { label: 'About Us', path: '/about' },
-  { label: 'Clients & Cases', path: '/case-studies' },
-  { label: 'Careers', path: '/careers' },
-  { label: 'Contact', path: '/contact' },
+const SELECTED_WORK = [
+  { label: 'NMDC Telemetry', path: '/#selected-work' },
+  { label: 'Greenko Operations', path: '/#selected-work' },
+  { label: 'US Healthcare Engagement', path: '/#selected-work' },
 ];
 
 export default function Footer() {
@@ -34,14 +32,14 @@ export default function Footer() {
         <div className="container">
           <div className="footer__cta-inner">
             <div className="footer__cta-text">
-              <h2>Ready to modernize your institution?</h2>
-              <p>Schedule a consultation with our enterprise solutions team.</p>
+              <h2>Ready to build mission-critical systems?</h2>
+              <p>Speak directly with our engineering and delivery leadership.</p>
             </div>
             <div className="footer__cta-actions">
-              <Link to="/enquiry" className="btn btn--white btn--lg">
-                Request Demo
+              <a href="#contact" className="btn btn--white btn--lg">
+                Talk to us
                 <ArrowRight size={16} />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -57,7 +55,7 @@ export default function Footer() {
                 <img src="/images/logo_text.png" alt="Eksper Technologies" />
               </Link>
               <p className="footer__tagline">
-                Enterprise campus management & e-Governance infrastructure for India's premier institutions since 2000.
+                25+ years building mission-critical systems for government, education, mining, energy and healthcare.
               </p>
 
               <div className="footer__hq">
@@ -74,33 +72,33 @@ export default function Footer() {
                 </div>
                 <div className="footer__hq-row">
                   <Mail size={14} />
-                  <a href="mailto:support@ekspertechnologies.in">support@ekspertechnologies.in</a>
+                  <a href="mailto:info@ekspertech.com">info@ekspertech.com</a>
                 </div>
               </div>
             </div>
 
             {/* Links Columns */}
             <div className="footer__links-col">
-              <h4 className="footer__col-title">Solutions</h4>
-              {SOLUTIONS.map((item) => (
-                <Link key={item.path} to={item.path} className="footer__link">{item.label}</Link>
+              <h4 className="footer__col-title">What We Do</h4>
+              {WHAT_WE_DO.map((item, idx) => (
+                <a key={idx} href={item.path} className="footer__link">{item.label}</a>
               ))}
             </div>
 
             <div className="footer__links-col">
-              <h4 className="footer__col-title">Services</h4>
-              {SERVICES.map((item) => (
-                <Link key={item.path} to={item.path} className="footer__link">{item.label}</Link>
+              <h4 className="footer__col-title">Where We Work</h4>
+              {WHERE_WE_WORK.map((item, idx) => (
+                <a key={idx} href={item.path} className="footer__link">{item.label}</a>
               ))}
             </div>
 
             <div className="footer__links-col">
-              <h4 className="footer__col-title">Company</h4>
-              {COMPANY.map((item) => (
-                <Link key={item.path} to={item.path} className="footer__link">{item.label}</Link>
+              <h4 className="footer__col-title">Selected Work</h4>
+              {SELECTED_WORK.map((item, idx) => (
+                <a key={idx} href={item.path} className="footer__link">{item.label}</a>
               ))}
-              <a href="/downloads" className="footer__link">
-                Downloads <ArrowUpRight size={12} />
+              <a href="#contact" className="footer__link" style={{ marginTop: 12, color: 'var(--ember)', fontWeight: 600 }}>
+                Talk to us →
               </a>
             </div>
           </div>
