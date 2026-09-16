@@ -11,8 +11,7 @@ import {
   Brain, 
   ShieldCheck, 
   Layers,
-  ChevronRight,
-  Quote
+  ChevronRight
 } from 'lucide-react';
 import VideoModal from '../components/VideoModal';
 import './HomePage.css';
@@ -129,26 +128,6 @@ export default function HomePage() {
     },
   ];
 
-  const testimonials = [
-    {
-      quote: "Eksper Technologies' work delivery and performance has been found excellent and professional by continuously meeting rigorous project deadlines for the entire State admissions platform.",
-      name: 'Dr. Rajat Kumar, IAS',
-      role: 'Principal Secretary, LET&F Dept · Govt. of Telangana',
-      logo: '/images/iti_logo.png',
-    },
-    {
-      quote: "The team did an exceptional job handling the Web Portal for the entire Mangalore University. The implementation was remarkably organized, reliable, and compliant with all our academic guidelines.",
-      name: 'Dr. Sridhar M.A.',
-      role: 'Professor of Physics · Mangalore University',
-      logo: '/images/mangalore_university_logo.png',
-    },
-    {
-      quote: "Eksper Technologies delivered a good job in handling the application and admission workflow for various postgraduate courses across all departments and affiliated colleges of the university.",
-      name: 'Prof. G. Hemantha Kumar',
-      role: 'Co-Ordinator · University of Mysore',
-      logo: '/images/editorial/mysore_university.jpg',
-    },
-  ];
 
   const clients = [
     { name: 'University of Mysore', logo: '/images/editorial/mysore_university.jpg' },
@@ -351,36 +330,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== TESTIMONIALS ===== */}
-      <section className="section section--dark" id="testimonials" data-animate>
-        <div className="container">
-          <div className="section-header--center">
-            <div className="section-eyebrow" style={{ justifyContent: 'center', color: 'var(--stone-300)' }}>
-              Client Endorsements
-            </div>
-            <h2 className="section-title">Trusted by institutional leaders</h2>
-            <p className="section-subtitle" style={{ color: 'var(--stone-300)', marginBottom: 56 }}>
-              Direct endorsements from government secretaries and university coordinators.
-            </p>
-          </div>
-
-          <div className="testimonials__grid">
-            {testimonials.map((t, i) => (
-              <div key={i} className="testimonial-card">
-                <Quote size={24} className="testimonial-card__quote-icon" />
-                <p className="testimonial-card__text">{t.quote}</p>
-                <div className="testimonial-card__author">
-                  <img src={t.logo} alt={t.name} className="testimonial-card__logo" />
-                  <div>
-                    <strong className="testimonial-card__name">{t.name}</strong>
-                    <span className="testimonial-card__role">{t.role}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ===== PLATFORM OVERVIEW ===== */}
       <section className="section" id="platform" data-animate>
