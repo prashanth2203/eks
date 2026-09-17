@@ -10,7 +10,7 @@ const NAV_ITEMS = [
     children: [
       { label: 'Digital Transformation', desc: 'Modernising legacy systems into platforms that work', path: '/services#digital-transformation' },
       { label: 'Data & AI', desc: 'Data platforms, analytics and operational AI', path: '/ai-healthcare' },
-      { label: 'Enterprise Platforms', desc: 'State e-Governance & institutional platforms', path: '/services#enterprise-platforms' },
+      { label: 'Enterprise Platforms', desc: 'State e-Governance & institutional platforms', path: '/enterprise-platforms' },
       { label: 'Cloud Infrastructure', desc: 'High-concurrency & mission-critical systems', path: '/cloud-services' },
       { label: 'Mining Telemetry', desc: 'Weighbridge capture and dispatch logistics', path: '/mining' },
     ]

@@ -30,6 +30,7 @@ const SERVICES = [
       'CAG-compliant double-entry financial ledgers and statutory tracking',
       'Large-scale multi-department operational orchestration',
     ],
+    link: '/enterprise-platforms',
   },
   {
     id: 'run-support',

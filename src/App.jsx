@@ -9,8 +9,8 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import AiHealthcarePage from './pages/AiHealthcarePage';
-import CloudServicesPage from './pages/CloudServicesPage';
 import MiningPage from './pages/MiningPage';
+import EnterprisePlatformsPage from './pages/EnterprisePlatformsPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
 import CareersPage from './pages/CareersPage';
 import ContactPage from './pages/ContactPage';
@@ -25,8 +25,8 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
-          <Route path="/enterprise-platforms" element={<Navigate to="/services" replace />} />
-          <Route path="/services/enterprise-platforms" element={<Navigate to="/services" replace />} />
+          <Route path="/enterprise-platforms" element={<EnterprisePlatformsPage />} />
+          <Route path="/services/enterprise-platforms" element={<Navigate to="/enterprise-platforms" replace />} />
           <Route path="/ai-healthcare" element={<AiHealthcarePage />} />
           <Route path="/cloud-services" element={<CloudServicesPage />} />
           <Route path="/mining" element={<MiningPage />} />

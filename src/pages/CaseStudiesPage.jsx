@@ -30,6 +30,25 @@ const FEATURED_CASES = [
   },
 ];
 
+const PUBLIC_SECTOR_CASES = [
+  {
+    id: 'uom',
+    client: 'University of Mysore',
+    sector: 'State Institutional Governance & Examination Security',
+    problem: 'Administrative operations across 70+ postgraduate departments and 100+ affiliated centres operated through disjointed manual paperwork, causing weeks-long bottlenecks in admissions, examination processing, and records retrieval.',
+    whatChanged: 'Deployed centralized institutional governance suite unifying lifecycle management, barcode-driven confidential examination processing with masked dummy grading, and CAG-audit-ready double-entry financial accounting.',
+    highlights: ['70+ PG Departments', '100+ Affiliated Centres', 'Barcode Dummy Number Masking', 'CAG Audit Compliance'],
+  },
+  {
+    id: 'state-det',
+    client: 'State Technical Education & Polytechnic Directorate (DET)',
+    sector: 'Statewide Admissions & Web Counselling',
+    problem: 'Multi-round statewide admission counselling across 100+ polytechnic institutions suffered from server crashes and verification backlogs during peak candidate seat allocation cycles.',
+    whatChanged: 'Engineered a high-throughput web counselling engine handling simultaneous statewide candidate verification, rank-based choice filling, and real-time seat allocations under statutory reservation quotas.',
+    highlights: ['50,000+ Simultaneous Allocations', 'Multi-Round Web Counselling', 'Statutory Quota Validation', 'Zero-Downtime Peak Load'],
+  },
+];
+
 export default function CaseStudiesPage() {
   return (
     <div className="case-studies-page">
@@ -91,6 +110,109 @@ export default function CaseStudiesPage() {
                   {c.highlights.map((h, i) => (
                     <span key={i} style={{ fontSize: '0.8125rem', padding: '6px 14px', background: 'var(--stone-100)', borderRadius: 'var(--r-full)', color: 'var(--ink-secondary)', fontWeight: 500 }}>
                       {h}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Public Sector & Institutional Section */}
+      <section className="section section--stone" id="public-sector">
+        <div className="container">
+          <div className="section-eyebrow" style={{ marginBottom: 12 }}>Public Sector Delivery</div>
+          <h2 className="section-title" style={{ marginBottom: 12 }}>Public Sector & Institutional Platforms</h2>
+          <p className="section-subtitle" style={{ maxWidth: 760, marginBottom: 36 }}>
+            High-concurrency web counselling engines, confidential examination security, and state-wide administrative databases delivered at institutional scale.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
+            {PUBLIC_SECTOR_CASES.map((h) => (
+              <div
+                key={h.id}
+                style={{
+                  background: 'var(--white)',
+                  border: '1px solid var(--stone-200)',
+                  borderRadius: 'var(--r-lg)',
+                  padding: '28px 24px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  boxShadow: '0 4px 16px -4px rgba(0, 0, 0, 0.04)',
+                }}
+              >
+                <div style={{ marginBottom: 16, paddingBottom: 12, borderBottom: '1px solid var(--stone-100)' }}>
+                  <span
+                    style={{
+                      display: 'block',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      color: 'var(--ember)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.07em',
+                      marginBottom: 6,
+                    }}
+                  >
+                    {h.sector}
+                  </span>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'var(--ink)' }}>
+                    {h.client}
+                  </h3>
+                </div>
+
+                <div style={{ marginBottom: 16 }}>
+                  <span
+                    style={{
+                      display: 'block',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.06em',
+                      color: 'var(--ink-faint)',
+                      marginBottom: 4,
+                    }}
+                  >
+                    The Problem
+                  </span>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--ink-secondary)', lineHeight: 1.6, margin: 0 }}>
+                    {h.problem}
+                  </p>
+                </div>
+
+                <div style={{ marginBottom: 20, borderLeft: '2.5px solid var(--ember)', paddingLeft: 12 }}>
+                  <span
+                    style={{
+                      display: 'block',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.06em',
+                      color: 'var(--ember)',
+                      marginBottom: 4,
+                    }}
+                  >
+                    What Changed
+                  </span>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--ink)', lineHeight: 1.6, margin: 0 }}>
+                    {h.whatChanged}
+                  </p>
+                </div>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 'auto', paddingTop: 12 }}>
+                  {h.highlights.map((tag, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        fontSize: '0.75rem',
+                        padding: '4px 10px',
+                        background: 'var(--stone-100)',
+                        borderRadius: 'var(--r-full)',
+                        color: 'var(--ink-secondary)',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {tag}
                     </span>
                   ))}
                 </div>
