@@ -171,7 +171,7 @@ export default function Header() {
           <p className="mobile-drawer__contact">
             <a href="tel:04023554455">040 2355 4455</a>
             <span> · </span>
-            <a href="mailto:support@ekspertechnologies.in">support@ekspertechnologies.in</a>
+            <a href="mailto:info@ekspertech.com">info@ekspertech.com</a>
           </p>
         </div>
       </div>
