@@ -142,7 +142,6 @@ export default function HomePage() {
       {/* 3. WHAT WE DO */}
       <section className="section section--stone" id="what-we-do">
         <div className="container">
-          <div className="section-eyebrow">Capabilities</div>
           <h2 className="section-title">What we do</h2>
           <div className="four-cards-grid">
             <div className="simple-card">
@@ -171,7 +170,6 @@ export default function HomePage() {
       {/* 4. WHERE WE WORK */}
       <section className="section section--warm" id="where-we-work">
         <div className="container">
-          <div className="section-eyebrow">Sectors</div>
           <h2 className="section-title">Where we work</h2>
           <div className="five-cards-grid">
             <div className="simple-card">
@@ -206,7 +204,6 @@ export default function HomePage() {
       <section className="section section--stone" id="selected-work">
         <div className="container">
           <div className="section-intro">
-            <div className="section-eyebrow">Track Record</div>
             <h2 className="section-title">Selected work</h2>
           </div>
 
@@ -270,80 +267,65 @@ export default function HomePage() {
 
       {/* 6. CONTACT */}
       <section className="contact-section" id="contact">
-        <div className="container">
-          <div className="contact-wrap">
-            <div className="contact-heading">
-              <div className="section-eyebrow">Get in touch</div>
-              <h2 className="contact-title">Talk to us.</h2>
-              <p className="contact-sub">
-                Talk directly with our engineering and leadership team.
-              </p>
-              <div className="contact-direct">
-                <span className="contact-direct__label">Email directly</span>
-                <a href="mailto:info@ekspertech.com" className="contact-direct__link">
-                  info@ekspertech.com
-                  <ArrowRight size={14} />
-                </a>
-              </div>
-            </div>
+        <div className="container container--narrow">
+          <div className="contact-wrap-streamlined">
+            <h2 className="contact-title" style={{ textAlign: 'center', marginBottom: 36 }}>Talk to us.</h2>
 
-            <div className="contact-action-area">
-              {formSubmitted ? (
-                <div className="contact-success-banner">
-                  <Check size={22} className="contact-success__check" />
-                  <div>
-                    <h4>Message received</h4>
-                    <p>Thank you. We will get back to you shortly.</p>
-                  </div>
+            {formSubmitted ? (
+              <div className="contact-success-banner" style={{ maxWidth: 540, margin: '0 auto' }}>
+                <Check size={22} className="contact-success__check" />
+                <div>
+                  <h4>Message received</h4>
+                  <p>Thank you. We will get back to you shortly.</p>
                 </div>
-              ) : (
-                <form className="contact-form-refined" onSubmit={handleFormSubmit}>
-                  <div className="form-fields-grid">
-                    <label className="form-field-unit">
-                      <span>Name</span>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        placeholder="Your name"
-                        required
-                      />
-                    </label>
+              </div>
+            ) : (
+              <form className="contact-form-refined" onSubmit={handleFormSubmit} style={{ maxWidth: 540, margin: '0 auto' }}>
+                <div className="form-fields-grid">
+                  <label className="form-field-unit">
+                    <span>Name</span>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Your name"
+                      required
+                    />
+                  </label>
 
-                    <label className="form-field-unit">
-                      <span>Email</span>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="name@company.com"
-                        required
-                      />
-                    </label>
+                  <label className="form-field-unit">
+                    <span>Email</span>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="name@company.com"
+                      required
+                    />
+                  </label>
 
-                    <label className="form-field-unit">
-                      <span>Phone</span>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        placeholder="+91 or international"
-                      />
-                    </label>
-                  </div>
+                  <label className="form-field-unit">
+                    <span>Phone</span>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="+91 or international"
+                    />
+                  </label>
+                </div>
 
-                  <div className="form-submit-row">
-                    <button type="submit" className="btn btn--primary btn--lg contact-btn-refined">
-                      Submit
-                      <ArrowRight size={16} />
-                    </button>
-                  </div>
-                </form>
-              )}
-            </div>
+                <div className="form-submit-row" style={{ textAlign: 'center', marginTop: 36 }}>
+                  <button type="submit" className="btn btn--primary btn--lg contact-btn-refined" style={{ width: '100%', justifyContent: 'center' }}>
+                    Submit
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </section>

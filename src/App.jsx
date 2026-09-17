@@ -10,7 +10,6 @@ import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import AiHealthcarePage from './pages/AiHealthcarePage';
 import CloudServicesPage from './pages/CloudServicesPage';
-import WebServicesPage from './pages/WebServicesPage';
 import MiningPage from './pages/MiningPage';
 import EnterprisePlatformsPage from './pages/EnterprisePlatformsPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
@@ -31,12 +30,12 @@ export default function App() {
           <Route path="/services/enterprise-platforms" element={<Navigate to="/enterprise-platforms" replace />} />
           <Route path="/ai-healthcare" element={<AiHealthcarePage />} />
           <Route path="/cloud-services" element={<CloudServicesPage />} />
-          <Route path="/web-services" element={<WebServicesPage />} />
           <Route path="/mining" element={<MiningPage />} />
           <Route path="/case-studies" element={<CaseStudiesPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact" element={<ContactPage />} />
           {/* Aliases & Fallbacks */}
+          <Route path="/web-services" element={<Navigate to="/services" replace />} />
           <Route path="/solutions" element={<Navigate to="/services" replace />} />
           <Route path="/enquiry" element={<Navigate to="/contact" replace />} />
           <Route path="/downloads" element={<Navigate to="/" replace />} />

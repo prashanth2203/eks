@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, Briefcase, Clock } from 'lucide-react';
 
 const OPENINGS = [
-  { title: 'Senior Java Developer', dept: 'Engineering', location: 'Hyderabad', type: 'Full-time', desc: 'Build and maintain enterprise Java/Spring applications powering institutional ERP platforms.' },
-  { title: 'Business Analyst', dept: 'Product', location: 'Hyderabad', type: 'Full-time', desc: 'Bridge institutional requirements with technical implementation for university ERP deployments.' },
-  { title: 'UI/UX Designer', dept: 'Design', location: 'Hyderabad', type: 'Full-time', desc: 'Design intuitive interfaces for complex enterprise campus management workflows.' },
-  { title: 'Software Tester / QA', dept: 'Quality', location: 'Hyderabad', type: 'Full-time', desc: 'Ensure quality and reliability of mission-critical educational software platforms.' },
-  { title: 'Business Development Executive', dept: 'Sales', location: 'Hyderabad / Remote', type: 'Full-time', desc: 'Drive enterprise sales for ERP and e-Governance solutions across universities and government bodies.' },
+  { title: 'Senior Backend / Java Engineer', dept: 'Engineering', location: 'Hyderabad', type: 'Full-time', desc: 'Build and maintain high-concurrency Java and microservices architectures powering mission-critical platforms.' },
+  { title: 'Data & AI Pipeline Engineer', dept: 'Data & AI', location: 'Hyderabad', type: 'Full-time', desc: 'Engineer robust data ingestion pipelines, FHIR healthcare integrations, and operational telemetry models.' },
+  { title: 'Cloud & Infrastructure Architect', dept: 'Infrastructure', location: 'Hyderabad', type: 'Full-time', desc: 'Architect resilient multi-region cloud and hybrid deployments built for extreme throughput and zero downtime.' },
+  { title: 'UI/UX Systems Designer', dept: 'Design', location: 'Hyderabad', type: 'Full-time', desc: 'Design clean, high-density interfaces for complex operational and institutional administrative workflows.' },
+  { title: 'Enterprise Solutions Lead', dept: 'Client Solutions', location: 'Hyderabad / Hybrid', type: 'Full-time', desc: 'Partner with engineering leadership across public directorates, mining operations, and enterprise clients.' },
 ];
 
 export default function CareersPage() {
@@ -16,9 +16,9 @@ export default function CareersPage() {
       <section className="page-hero">
         <div className="container">
           <div className="page-hero__eyebrow">Careers</div>
-          <h1 className="page-hero__title">Build the infrastructure that powers education.</h1>
+          <h1 className="page-hero__title">Build mission-critical systems at enterprise scale.</h1>
           <p className="page-hero__desc">
-            Join a team that's transforming how India's leading universities and institutions operate.
+            Join an engineering team building digital transformation and AI solutions across government, mining, energy, healthcare, and education.
           </p>
         </div>
       </section>
@@ -30,16 +30,16 @@ export default function CareersPage() {
               <div className="section-eyebrow">Why Eksper</div>
               <h2 className="section-title">Real impact, real scale</h2>
               <p style={{ color: 'var(--ink-muted)', lineHeight: 1.7, marginBottom: 24 }}>
-                When you join Eksper Technologies, your code doesn't just ship to a staging server — it powers university admissions for thousands of students, manages examination integrity for entire states, and helps institutions modernize decades-old processes.
+                When you join Eksper Technologies, your code powers production systems under real-world operational pressure — from state-wide public governance and automated mining telemetry to high-availability energy platforms and clinical AI ingestion.
               </p>
               <p style={{ color: 'var(--ink-muted)', lineHeight: 1.7 }}>
-                We're a team of engineers, designers, and domain experts based in Hyderabad, working on problems that genuinely matter for Indian higher education.
+                We're a team of systems engineers, data architects, and designers based in Hyderabad, solving engineering problems that genuinely matter.
               </p>
 
               <div style={{ marginTop: 32, padding: 24, background: 'var(--stone-50)', borderRadius: 'var(--r-lg)' }}>
                 <h4 style={{ marginBottom: 12 }}>Can't find your role?</h4>
                 <p style={{ fontSize: '0.875rem', color: 'var(--ink-muted)', marginBottom: 16 }}>
-                  Send your resume to <a href="mailto:careers@ekspertechnologies.in" style={{ color: 'var(--ember)', textDecoration: 'none', fontWeight: 600 }}>careers@ekspertechnologies.in</a>
+                  Send your resume to <a href="mailto:careers@ekspertech.com" style={{ color: 'var(--ember)', textDecoration: 'none', fontWeight: 600 }}>careers@ekspertech.com</a>
                 </p>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function CareersPage() {
                           </span>
                         </div>
                       </div>
-                      <a href={`mailto:careers@ekspertechnologies.in?subject=Application: ${job.title}`} className="btn btn--outline btn--sm" style={{ flexShrink: 0, marginTop: 4 }}>
+                      <a href={`mailto:careers@ekspertech.com?subject=Application: ${job.title}`} className="btn btn--outline btn--sm" style={{ flexShrink: 0, marginTop: 4 }}>
                         Apply
                       </a>
                     </div>
