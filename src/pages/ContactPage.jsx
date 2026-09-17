@@ -7,7 +7,23 @@ export default function ContactPage() {
   const email = 'info@ekspertech.com';
 
   const handleCopy = () => {
-    navigator.clipboard?.writeText(email);
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(email);
+    } else {
+      const textArea = document.createElement('textarea');
+      textArea.value = email;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-9999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) {
+        console.error('Fallback copy failed', err);
+      }
+      document.body.removeChild(textArea);
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
