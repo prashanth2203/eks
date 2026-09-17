@@ -14,7 +14,7 @@ const SECTORS = [
 const SERVICES = [
   { label: 'Digital Transformation', path: '/services' },
   { label: 'Data & AI', path: '/ai-healthcare' },
-  { label: 'Enterprise Platforms', path: '/enterprise-platforms' },
+  { label: 'Enterprise Platforms', path: '/services#enterprise-platforms' },
   { label: 'Cloud Infrastructure', path: '/cloud-services' },
   { label: 'Mining Telemetry', path: '/mining' },
 ];
