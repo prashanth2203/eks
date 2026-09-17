@@ -126,7 +126,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(24px, 4vw, 48px);
+  gap: clamp(20px, 3.5vw, 44px);
   flex-wrap: wrap;
 }
 
@@ -134,47 +134,50 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 36px;
+  max-width: 140px;
   color: var(--ink-muted);
   filter: grayscale(100%);
   cursor: default;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 420ms var(--ease), transform 240ms var(--ease), filter 240ms ease, color 240ms ease;
 }
 
 .client-logo {
-  height: 32px;
+  height: 30px;
+  max-height: 30px;
   width: auto;
-  max-width: 160px;
+  max-width: 135px;
   object-fit: contain;
 }
 
 .client-logo-combo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  max-height: 30px;
 }
 
 .client-logo-img {
-  height: 32px;
-  width: 32px;
+  height: 28px;
+  width: 28px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .client-logo-text {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: currentColor;
+  white-space: nowrap;
 }
 
-/* Staggered scroll-in — Item 8 */
-.client-strip__item {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 420ms var(--ease), transform 420ms var(--ease), filter var(--t-fast), color var(--t-fast);
-}
-
+/* Staggered scroll-in & uniform contrast */
 .client-strip__item--visible {
-  opacity: 0.72;
+  opacity: 0.6;
   transform: translateY(0);
 }
 
@@ -182,6 +185,7 @@
   filter: grayscale(0%);
   opacity: 1;
   color: var(--ink);
+  transform: translateY(-1px);
 }
 
 /* Warm alternating section — Item 9 */
@@ -380,8 +384,108 @@
   transition: color var(--t-fast);
 }
 
-.contact-direct__link:hover {
+.contact-center {
+  text-align: center;
+  padding: 32px 0 44px;
+}
+
+.contact-action-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.contact-email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  transition: color var(--t-fast);
+}
+
+.contact-email-link:hover {
   color: var(--ember);
+}
+
+.contact-email-arrow {
+  transition: transform var(--t-fast);
+}
+
+.contact-email-link:hover .contact-email-arrow {
+  transform: translateX(4px);
+}
+
+.contact-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--stone-300);
+  background: var(--white);
+  color: var(--ink-secondary);
+  cursor: pointer;
+  position: relative;
+  transition: all var(--t-fast);
+  padding: 0;
+}
+
+.contact-copy-btn:hover {
+  border-color: var(--ember);
+  color: var(--ember);
+  background: var(--stone-50);
+  transform: translateY(-1px);
+}
+
+.contact-copy-btn--copied {
+  border-color: #16a34a;
+  color: #16a34a;
+  background: #f0fdf4;
+}
+
+.contact-copy-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--ink);
+  color: var(--white);
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 160ms ease, transform 160ms ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 20;
+}
+
+.contact-copy-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: var(--ink) transparent transparent transparent;
+}
+
+.contact-copy-btn:hover .contact-copy-tooltip,
+.contact-copy-btn--copied .contact-copy-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .contact-action-area {

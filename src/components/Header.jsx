@@ -58,7 +58,15 @@ export default function Header() {
 
   const isActive = (item) => {
     if (item.path === '/') return location.pathname === '/';
-    return location.pathname.startsWith(item.path);
+    if (location.pathname === item.path) return true;
+    if (item.path !== '/' && location.pathname.startsWith(item.path)) return true;
+    if (item.children) {
+      return item.children.some((child) => {
+        const childBasePath = child.path.split('#')[0];
+        return childBasePath && childBasePath !== '/' && location.pathname === childBasePath;
+      });
+    }
+    return false;
   };
 
   return (
@@ -81,6 +89,7 @@ export default function Header() {
               <Link
                 to={item.path}
                 className={`nav-link ${isActive(item) ? 'nav-link--active' : ''}`}
+                aria-current={isActive(item) ? 'page' : undefined}
               >
                 {item.label}
                 {item.children && <ChevronDown size={13} className="nav-caret" />}
@@ -89,12 +98,20 @@ export default function Header() {
               {item.children && (
                 <div className={`dropdown ${openDropdown === item.label ? 'dropdown--open' : ''}`}>
                   <div className="dropdown__list">
-                    {item.children.map((child) => (
-                      <Link key={child.path} to={child.path} className="dropdown__item">
-                        <span className="dropdown__item-label">{child.label}</span>
-                        <span className="dropdown__item-desc">{child.desc}</span>
-                      </Link>
-                    ))}
+                    {item.children.map((child) => {
+                      const isChildActive = location.pathname === child.path.split('#')[0];
+                      return (
+                        <Link
+                          key={child.path}
+                          to={child.path}
+                          className={`dropdown__item ${isChildActive ? 'dropdown__item--active' : ''}`}
+                          aria-current={isChildActive ? 'page' : undefined}
+                        >
+                          <span className="dropdown__item-label">{child.label}</span>
+                          <span className="dropdown__item-desc">{child.desc}</span>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -139,28 +156,40 @@ export default function Header() {
             <div key={item.label}>
               <Link
                 to={item.path}
-                className="mobile-drawer__link"
+                className={`mobile-drawer__link ${isActive(item) ? 'mobile-drawer__link--active' : ''}`}
+                aria-current={isActive(item) ? 'page' : undefined}
                 onClick={() => setMobileOpen(false)}
               >
                 {item.label}
               </Link>
               {item.children && (
                 <div className="mobile-drawer__sub">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.path}
-                      to={child.path}
-                      className="mobile-drawer__sub-link"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
+                  {item.children.map((child) => {
+                    const isChildActive = location.pathname === child.path.split('#')[0];
+                    return (
+                      <Link
+                        key={child.path}
+                        to={child.path}
+                        className={`mobile-drawer__sub-link ${isChildActive ? 'mobile-drawer__sub-link--active' : ''}`}
+                        aria-current={isChildActive ? 'page' : undefined}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {child.label}
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
             </div>
           ))}
-          <Link to="/careers" className="mobile-drawer__link" onClick={() => setMobileOpen(false)}>Careers</Link>
+          <Link
+            to="/careers"
+            className={`mobile-drawer__link ${location.pathname === '/careers' ? 'mobile-drawer__link--active' : ''}`}
+            aria-current={location.pathname === '/careers' ? 'page' : undefined}
+            onClick={() => setMobileOpen(false)}
+          >
+            Careers
+          </Link>
         </div>
 
         <div className="mobile-drawer__foot">

@@ -1,9 +1,18 @@
-import React, { useEffect, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowRight, Copy, Check } from 'lucide-react';
 import './HomePage.css';
 
 export default function HomePage() {
+  const [copied, setCopied] = useState(false);
   const clientStripRef = useRef(null);
+
+  const handleCopyEmail = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText('info@ekspertech.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2200);
+  };
 
   const scrollToContact = (e) => {
     e.preventDefault();
@@ -234,27 +243,30 @@ export default function HomePage() {
       {/* 6. CONTACT */}
       <section className="contact-section" id="contact">
         <div className="container container--narrow">
-          <div style={{ textAlign: 'center', padding: '24px 0 36px' }}>
-            <h2 className="contact-title" style={{ marginBottom: 20 }}>Talk to us.</h2>
-            <a
-              href="mailto:info@ekspertech.com"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 10,
-                fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)',
-                fontWeight: 600,
-                color: 'var(--ink)',
-                textDecoration: 'underline',
-                textUnderlineOffset: '6px',
-                transition: 'color var(--t-fast)',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ember)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink)')}
-            >
-              info@ekspertech.com
-              <ArrowRight size={20} />
-            </a>
+          <div className="contact-center">
+            <h2 className="contact-title">Talk to us.</h2>
+            <div className="contact-action-group">
+              <a
+                href="mailto:info@ekspertech.com"
+                className="contact-email-link"
+                title="Send an email to info@ekspertech.com"
+              >
+                info@ekspertech.com
+                <ArrowRight size={20} className="contact-email-arrow" />
+              </a>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className={`contact-copy-btn ${copied ? 'contact-copy-btn--copied' : ''}`}
+                aria-label={copied ? 'Email address copied' : 'Copy email address to clipboard'}
+                title={copied ? 'Copied!' : 'Copy to clipboard'}
+              >
+                {copied ? <Check size={16} /> : <Copy size={16} />}
+                <span className="contact-copy-tooltip">
+                  {copied ? 'Copied to clipboard!' : 'Copy email'}
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
