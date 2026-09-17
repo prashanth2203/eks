@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import AiHealthcarePage from './pages/AiHealthcarePage';
+import CloudServicesPage from './pages/CloudServicesPage';
 import MiningPage from './pages/MiningPage';
 import EnterprisePlatformsPage from './pages/EnterprisePlatformsPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
