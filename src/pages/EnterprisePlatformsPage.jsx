@@ -167,11 +167,6 @@ export default function EnterprisePlatformsPage() {
                         </li>
                       ))}
                     </ul>
-                    <div style={{ marginTop: 'auto', paddingTop: 20 }}>
-                      <Link to="/case-studies" className="btn btn--ghost" style={{ fontSize: '0.8125rem' }}>
-                        View in Case Studies <ArrowRight size={14} className="btn-arrow" />
-                      </Link>
-                    </div>
                   </div>
                 </div>
               </div>
