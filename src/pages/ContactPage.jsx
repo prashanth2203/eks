@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import { Mail, Copy, Check, ArrowUpRight } from 'lucide-react';
+import './ContactPage.css';
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  const [copied, setCopied] = useState(false);
+  const email = 'info@ekspertech.com';
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.name && (formData.email || formData.phone)) {
-      setSubmitted(true);
-    }
+  const handleCopy = () => {
+    navigator.clipboard?.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div>
+    <div className="contact-page">
       <section className="page-hero">
         <div className="container">
           <div className="page-hero__eyebrow">Get In Touch</div>
@@ -30,65 +26,38 @@ export default function ContactPage() {
 
       <section className="section">
         <div className="container container--narrow">
-          <div className="contact-box" style={{ margin: '0 auto' }}>
-            {submitted ? (
-              <div className="contact-success">
-                <Check size={24} className="contact-success__icon" />
-                <div>
-                  <h4>Message received</h4>
-                  <p>Thank you. We will get back to you shortly.</p>
-                </div>
-              </div>
-            ) : (
-              <form className="contact-simple-form" onSubmit={handleSubmit}>
-                <div className="contact-input-group">
-                  <label htmlFor="contact-name">Name</label>
-                  <input
-                    type="text"
-                    id="contact-name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your name"
-                    required
-                  />
-                </div>
+          <div className="contact-email-card">
+            <div className="contact-email-icon">
+              <Mail size={30} />
+            </div>
 
-                <div className="contact-input-group">
-                  <label htmlFor="contact-email">Email</label>
-                  <input
-                    type="email"
-                    id="contact-email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="name@company.com"
-                    required
-                  />
-                </div>
+            <div className="contact-email-label">Email us directly</div>
+            <a href={`mailto:${email}`} className="contact-email-address">
+              {email}
+            </a>
 
-                <div className="contact-input-group">
-                  <label htmlFor="contact-phone">Phone</label>
-                  <input
-                    type="tel"
-                    id="contact-phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+91 or international number"
-                  />
-                </div>
-
-                <button type="submit" className="btn btn--primary btn--lg contact-submit-btn">
-                  Submit
-                  <ArrowRight size={16} />
-                </button>
-              </form>
-            )}
-
-            <div className="contact-direct-link">
-              <span>Or email us directly: </span>
-              <a href="mailto:info@ekspertech.com">info@ekspertech.com</a>
+            <div className="contact-email-actions">
+              <a href={`mailto:${email}`} className="btn btn--primary btn--lg">
+                <span>Send Email</span>
+                <ArrowUpRight size={18} />
+              </a>
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="btn btn--outline btn--lg"
+              >
+                {copied ? (
+                  <>
+                    <Check size={18} style={{ color: '#10b981' }} />
+                    <span>Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={18} />
+                    <span>Copy Email</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
