@@ -1,43 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { ArrowRight } from 'lucide-react';
 import './HomePage.css';
 
 export default function HomePage() {
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const clientStripRef = useRef(null);
-
-  // Staggered scroll-in for client logos
-  useEffect(() => {
-    const strip = clientStripRef.current;
-    if (!strip) return;
-    const items = strip.querySelectorAll('.client-strip__item');
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          items.forEach((el, i) => {
-            setTimeout(() => el.classList.add('client-strip__item--visible'), i * 90);
-          });
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(strip);
-    return () => observer.disconnect();
-  }, []);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (formData.name && (formData.email || formData.phone)) {
-      setFormSubmitted(true);
-    }
-  };
 
   const scrollToContact = (e) => {
     e.preventDefault();
@@ -268,64 +234,27 @@ export default function HomePage() {
       {/* 6. CONTACT */}
       <section className="contact-section" id="contact">
         <div className="container container--narrow">
-          <div className="contact-wrap-streamlined">
-            <h2 className="contact-title" style={{ textAlign: 'center', marginBottom: 36 }}>Talk to us.</h2>
-
-            {formSubmitted ? (
-              <div className="contact-success-banner" style={{ maxWidth: 540, margin: '0 auto' }}>
-                <Check size={22} className="contact-success__check" />
-                <div>
-                  <h4>Message received</h4>
-                  <p>Thank you. We will get back to you shortly.</p>
-                </div>
-              </div>
-            ) : (
-              <form className="contact-form-refined" onSubmit={handleFormSubmit} style={{ maxWidth: 540, margin: '0 auto' }}>
-                <div className="form-fields-grid">
-                  <label className="form-field-unit">
-                    <span>Name</span>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Your name"
-                      required
-                    />
-                  </label>
-
-                  <label className="form-field-unit">
-                    <span>Email</span>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="name@company.com"
-                      required
-                    />
-                  </label>
-
-                  <label className="form-field-unit">
-                    <span>Phone</span>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="+91 or international"
-                    />
-                  </label>
-                </div>
-
-                <div className="form-submit-row" style={{ textAlign: 'center', marginTop: 36 }}>
-                  <button type="submit" className="btn btn--primary btn--lg contact-btn-refined" style={{ width: '100%', justifyContent: 'center' }}>
-                    Submit
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
-              </form>
-            )}
+          <div style={{ textAlign: 'center', padding: '24px 0 36px' }}>
+            <h2 className="contact-title" style={{ marginBottom: 20 }}>Talk to us.</h2>
+            <a
+              href="mailto:info@ekspertech.com"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 10,
+                fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)',
+                fontWeight: 600,
+                color: 'var(--ink)',
+                textDecoration: 'underline',
+                textUnderlineOffset: '6px',
+                transition: 'color var(--t-fast)',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ember)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink)')}
+            >
+              info@ekspertech.com
+              <ArrowRight size={20} />
+            </a>
           </div>
         </div>
       </section>

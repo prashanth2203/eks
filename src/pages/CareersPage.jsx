@@ -16,7 +16,7 @@ export default function CareersPage() {
       <section className="page-hero">
         <div className="container">
           <div className="page-hero__eyebrow">Careers</div>
-          <h1 className="page-hero__title">Build mission-critical systems at enterprise scale.</h1>
+          <h1 className="page-hero__title">Build mission-critical systems at national and enterprise scale.</h1>
           <p className="page-hero__desc">
             Join an engineering team building digital transformation and AI solutions across government, mining, energy, healthcare, and education.
           </p>
@@ -30,7 +30,7 @@ export default function CareersPage() {
               <div className="section-eyebrow">Why Eksper</div>
               <h2 className="section-title">Real impact, real scale</h2>
               <p style={{ color: 'var(--ink-muted)', lineHeight: 1.7, marginBottom: 24 }}>
-                When you join Eksper Technologies, your code powers production systems under real-world operational pressure — from state-wide public governance and automated mining telemetry to high-availability energy platforms and clinical AI ingestion.
+                When you join Eksper Technologies, you are engineering mission-critical digital transformation and AI across government, mining, energy, healthcare, and education.
               </p>
               <p style={{ color: 'var(--ink-muted)', lineHeight: 1.7 }}>
                 We're a team of systems engineers, data architects, and designers based in Hyderabad, solving engineering problems that genuinely matter.
