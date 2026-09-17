@@ -254,12 +254,31 @@ img {
   background-color: var(--ink);
   color: var(--white);
   border-color: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%);
+  transform: skewX(-15deg);
+  transition: left 480ms var(--ease);
+  pointer-events: none;
 }
 
 .btn--primary:hover {
   background-color: var(--stone-800);
   border-color: var(--stone-800);
   transform: translateY(-1px);
+}
+
+.btn--primary:hover::after {
+  left: 130%;
 }
 
 .btn--outline {

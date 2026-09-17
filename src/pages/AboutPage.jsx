@@ -1,23 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Users, Award, Globe, Calendar, Database, Shield, Building2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Shield, Database, Cpu, LifeBuoy } from 'lucide-react';
 import './AboutPage.css';
 
 export default function AboutPage() {
   const milestones = [
-    { year: '2000', title: 'Founded in Hyderabad', desc: 'Eksper Technologies established with a vision to digitize Indian higher education administration.' },
-    { year: '2005', title: 'First University ERP', desc: 'Deployed comprehensive university management system for University of Mysore — 76 PG departments.' },
-    { year: '2010', title: 'State-Wide Governance', desc: 'Scaled to state-wide ITI admission counselling for Telangana Government (DET).' },
-    { year: '2015', title: 'AI Research Lab', desc: 'Launched clinical AI research division for medical imaging diagnostics and EHR indexing.' },
-    { year: '2020', title: 'Cloud & Modern Stack', desc: 'Migrated all platforms to cloud-native architecture supporting 500,000+ concurrent users.' },
-    { year: '2024', title: 'CBCS & National Framework', desc: 'Full National Academic Depository (NAD) and DigiLocker integration across all campus modules.' },
+    { year: '2000', title: 'Founded in Hyderabad', desc: 'Established with a focus on engineering dependable software platforms for complex institutional environments.' },
+    { year: '2005', title: 'Large-Scale Institutional Platforms', desc: 'Deployed multi-department governance and administration systems across large public bodies.' },
+    { year: '2010', title: 'State-Wide Public Governance', desc: 'Architected high-throughput state-wide admissions and logistics platforms for public government departments.' },
+    { year: '2016', title: 'Mining & Energy Telemetry', desc: 'Expanded into industrial systems, weighbridge automation, and telemetry across public and private sector operations.' },
+    { year: '2020', title: 'Healthcare Data & AI Pipelines', desc: 'Engineered clinical data ingestion, FHIR-compliant pipelines, and analytics for US healthcare partners.' },
+    { year: '2024+', title: 'Operational AI & Enterprise Modernization', desc: 'Modernizing legacy architectures into cloud-native platforms with embedded operational AI.' },
   ];
 
   const values = [
-    { icon: <Shield size={20} />, title: 'Statutory Compliance', desc: 'Every module is architected around UGC, AICTE, and state government statutory requirements — not retrofitted.' },
-    { icon: <Database size={20} />, title: 'Single Database Architecture', desc: 'No data silos. One centralized database powers every campus function from admissions to audit.' },
-    { icon: <Users size={20} />, title: 'Domain Expertise', desc: '24+ years of deep institutional knowledge — not generic enterprise software adapted for education.' },
-    { icon: <Globe size={20} />, title: 'Pan-India Deployments', desc: 'Proven across Karnataka, Telangana, Gujarat, and beyond. State governments and private institutions alike.' },
+    { icon: <Shield size={20} />, title: 'Mission-Critical Delivery', desc: 'Zero tolerance for downtime or compliance failure. Systems engineered for strict statutory and regulatory mandates.' },
+    { icon: <Database size={20} />, title: 'Data Built Into Operations', desc: 'Data platforms, analytics, and operational AI integrated into day-to-day operations, not bolted on.' },
+    { icon: <Cpu size={20} />, title: 'Scale & Resilience', desc: 'High-concurrency architectures that perform under extreme seasonal loads and mission-critical telemetry.' },
+    { icon: <LifeBuoy size={20} />, title: 'Run & Support', desc: 'We do not hand over code and disappear. We stay on after go-live with continuous engineering and operational support.' },
   ];
 
   return (
@@ -25,29 +25,29 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="page-hero">
         <div className="container">
-          <div className="page-hero__eyebrow">About Eksper Technologies</div>
-          <h1 className="page-hero__title">Engineering institutional excellence since 2000.</h1>
+          <div className="page-hero__eyebrow">Who We Are</div>
+          <h1 className="page-hero__title">25+ years engineering mission-critical systems.</h1>
           <p className="page-hero__desc">
-            We are an enterprise software company that architects mission-critical digital campus and e-Governance infrastructure for India's premier universities, medical institutions, and state governments.
+            Eksper Technologies builds digital transformation and AI solutions for government, education, mining, energy and healthcare.
           </p>
         </div>
       </section>
 
-      {/* Story + Image */}
+      {/* Story */}
       <section className="section">
         <div className="container">
           <div className="about__story-layout">
             <div className="about__story-text">
               <div className="section-eyebrow">Our Story</div>
-              <h2 className="section-title">From Hyderabad to campuses across India</h2>
+              <h2 className="section-title">Built for institutional reliability</h2>
               <p style={{ marginBottom: 16 }}>
-                Founded in 2000, Eksper Technologies Limited began with a simple belief: that Indian universities and public institutions deserve purpose-built digital infrastructure — not generic tools adapted from other industries.
+                Founded in 2000 in Hyderabad, Eksper Technologies Limited was built around a singular principle: mission-critical organizations require purpose-engineered systems that work under real-world operational pressure.
               </p>
               <p style={{ marginBottom: 16 }}>
-                Over two decades, we've grown from a focused ERP provider into a comprehensive technology partner for state governments, medical universities, autonomous colleges, and K-12 school networks across India.
+                Over two and a half decades, we have delivered core platforms for state government bodies, premier public institutions, industrial mining leaders like NMDC, renewable energy operators like Greenko, and US healthcare organisations.
               </p>
               <p>
-                Today, our platforms power the academic lifecycle — from entrance test registration to convocation — for over <strong>500,000 students and stakeholders</strong>, with deployments across Karnataka, Telangana, Gujarat, and beyond.
+                Whether it is modernising multi-decade legacy platforms, deploying real-time industrial telemetry, or building clinical AI pipelines, we take end-to-end accountability from initial architecture through post-launch operations.
               </p>
             </div>
             <div className="about__story-image">
@@ -61,10 +61,10 @@ export default function AboutPage() {
       <section className="section section--beige">
         <div className="container">
           <div className="section-header--center" style={{ marginBottom: 56 }}>
-            <div className="section-eyebrow" style={{ justifyContent: 'center' }}>What Sets Us Apart</div>
-            <h2 className="section-title">Built different, by design</h2>
+            <div className="section-eyebrow" style={{ justifyContent: 'center' }}>Engineering Philosophy</div>
+            <h2 className="section-title">How we deliver</h2>
             <p className="section-subtitle">
-              We don't adapt generic enterprise tools. We engineer from first principles for Indian educational governance.
+              Platforms that work in production, supported by teams that stay on after go-live.
             </p>
           </div>
 
@@ -85,7 +85,7 @@ export default function AboutPage() {
         <div className="container container--narrow">
           <div className="section-header--center" style={{ marginBottom: 56 }}>
             <div className="section-eyebrow" style={{ justifyContent: 'center' }}>Our Journey</div>
-            <h2 className="section-title">Key milestones</h2>
+            <h2 className="section-title">25+ years of delivery milestones</h2>
           </div>
 
           <div className="about__timeline">
@@ -107,32 +107,32 @@ export default function AboutPage() {
         <div className="container">
           <div className="about__tech-layout">
             <div>
-              <div className="section-eyebrow" style={{ color: 'var(--stone-300)' }}>Technology Foundation</div>
-              <h2 className="section-title">Enterprise-grade stack</h2>
+              <div className="section-eyebrow" style={{ color: 'var(--stone-300)' }}>Platform Architecture</div>
+              <h2 className="section-title">Enterprise technology foundation</h2>
               <p className="section-subtitle" style={{ color: 'var(--stone-300)', marginBottom: 32 }}>
-                Built on proven enterprise technologies with security, scalability, and auditability at every layer.
+                Built on proven enterprise frameworks with security, high availability, and auditability at every layer.
               </p>
 
               <div className="about__tech-list">
                 <div className="about__tech-item">
                   <CheckCircle2 size={16} />
-                  <span>Java Enterprise, Spring Framework, Groovy & Grails</span>
+                  <span>Java Enterprise, Spring Framework, and resilient microservices</span>
                 </div>
                 <div className="about__tech-item">
                   <CheckCircle2 size={16} />
-                  <span>Hibernate ORM with role-based encryption</span>
+                  <span>Secure persistence with encrypted audit trails and statutory compliance</span>
                 </div>
                 <div className="about__tech-item">
                   <CheckCircle2 size={16} />
-                  <span>AWS / Azure cloud with auto-scaling infrastructure</span>
+                  <span>Multi-region AWS & Azure cloud infrastructure with auto-scaling</span>
                 </div>
                 <div className="about__tech-item">
                   <CheckCircle2 size={16} />
-                  <span>Device-independent responsive web & mobile portals</span>
+                  <span>Operational telemetry, weighbridge hardware integration & IoT gateways</span>
                 </div>
                 <div className="about__tech-item">
                   <CheckCircle2 size={16} />
-                  <span>ISO 9001:2015 certified development processes</span>
+                  <span>ISO 9001:2015 certified engineering and quality delivery processes</span>
                 </div>
               </div>
             </div>
@@ -150,11 +150,11 @@ export default function AboutPage() {
           <div style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto' }}>
             <h2 className="section-title">Work with us</h2>
             <p className="section-subtitle" style={{ margin: '0 auto 32px' }}>
-              Whether you're modernizing a state university or launching a new campus, we'd love to explore how we can help.
+              Connect with our leadership and engineering teams to discuss your systems and roadmap.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/enquiry" className="btn btn--primary btn--lg">
-                Schedule Consultation <ArrowRight size={14} />
+              <Link to="/contact" className="btn btn--primary btn--lg">
+                Talk to us <ArrowRight size={14} />
               </Link>
               <Link to="/careers" className="btn btn--outline btn--lg">
                 Join Our Team

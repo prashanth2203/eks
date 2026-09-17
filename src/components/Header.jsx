@@ -5,27 +5,18 @@ import './Header.css';
 
 const NAV_ITEMS = [
   {
-    label: 'Solutions',
-    path: '/solutions',
-    children: [
-      { label: 'University e-Governance (UMS)', desc: 'State-wide admissions, CBCS & examinations', path: '/solutions#e-governance' },
-      { label: 'College & Autonomous ERP (CMS)', desc: 'Elective engines, smart cards & attendance', path: '/solutions#college' },
-      { label: 'K-12 School Management (SMS)', desc: 'Parent apps, GPS bus tracking & fees', path: '/solutions#school' },
-    ]
-  },
-  {
     label: 'Services',
     path: '/services',
     children: [
-      { label: 'Cloud Infrastructure', desc: 'AWS, Azure & on-premise deployments', path: '/cloud-services' },
-      { label: 'AI Healthcare Research', desc: 'Clinical imaging & diagnostic models', path: '/ai-healthcare' },
-      { label: 'Data Migration & Integration', desc: 'Legacy data cleansing & API pipelines', path: '/services#sw-int-mig' },
-      { label: 'Tamper-Proof Certificates', desc: 'Cryptographic QR-verified degrees', path: '/services#temper_proof' },
-      { label: 'Mining Telemetry', desc: 'Weighbridge automation & dispatch', path: '/mining' },
+      { label: 'Digital Transformation', desc: 'Modernising legacy systems into platforms that work', path: '/services#digital-transformation' },
+      { label: 'Data & AI', desc: 'Data platforms, analytics and operational AI', path: '/ai-healthcare' },
+      { label: 'Enterprise Platforms', desc: 'ERP, e-Governance & institutional scale', path: '/enterprise-platforms' },
+      { label: 'Cloud Infrastructure', desc: 'High-concurrency & mission-critical systems', path: '/cloud-services' },
+      { label: 'Mining Telemetry', desc: 'Weighbridge capture and dispatch logistics', path: '/mining' },
     ]
   },
+  { label: 'Who We Are', path: '/about' },
   { label: 'Clients & Cases', path: '/case-studies' },
-  { label: 'About', path: '/about' },
   { label: 'Contact', path: '/contact' },
 ];
 
@@ -117,8 +108,8 @@ export default function Header() {
             <Phone size={14} />
             <span>040 2355 4455</span>
           </a>
-          <Link to="/enquiry" className="btn btn--primary btn--sm">
-            Request Demo
+          <Link to="/contact" className="btn btn--primary btn--sm">
+            Talk to us
             <ArrowRight size={14} />
           </Link>
           <button
@@ -170,12 +161,11 @@ export default function Header() {
             </div>
           ))}
           <Link to="/careers" className="mobile-drawer__link" onClick={() => setMobileOpen(false)}>Careers</Link>
-          <Link to="/downloads" className="mobile-drawer__link" onClick={() => setMobileOpen(false)}>Downloads</Link>
         </div>
 
         <div className="mobile-drawer__foot">
-          <Link to="/enquiry" className="btn btn--primary" style={{ width: '100%' }} onClick={() => setMobileOpen(false)}>
-            Request Demo
+          <Link to="/contact" className="btn btn--primary" style={{ width: '100%' }} onClick={() => setMobileOpen(false)}>
+            Talk to us
             <ArrowRight size={14} />
           </Link>
           <p className="mobile-drawer__contact">

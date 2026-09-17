@@ -1,26 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, MapPin, Phone, Mail } from 'lucide-react';
 import './Footer.css';
 
-const SOLUTIONS = [
-  { label: 'University e-Governance', path: '/solutions#e-governance' },
-  { label: 'College & Autonomous ERP', path: '/solutions#college' },
-  { label: 'K-12 School Management', path: '/solutions#school' },
-  { label: 'Examination System', path: '/solutions#examination' },
-  { label: 'CBCS Engine', path: '/solutions#cbcs' },
+const SECTORS = [
+  { label: 'Government & e-Governance', path: '/#where-we-work' },
+  { label: 'Education', path: '/#where-we-work' },
+  { label: 'Mining', path: '/mining' },
+  { label: 'Energy', path: '/#where-we-work' },
+  { label: 'Healthcare', path: '/ai-healthcare' },
 ];
 
 const SERVICES = [
+  { label: 'Digital Transformation', path: '/services' },
+  { label: 'Data & AI', path: '/ai-healthcare' },
+  { label: 'Enterprise Platforms', path: '/enterprise-platforms' },
   { label: 'Cloud Infrastructure', path: '/cloud-services' },
-  { label: 'AI Healthcare', path: '/ai-healthcare' },
-  { label: 'Data Migration', path: '/services#sw-int-mig' },
-  { label: 'Tamper-Proof Certificates', path: '/services#temper_proof' },
   { label: 'Mining Telemetry', path: '/mining' },
 ];
 
 const COMPANY = [
-  { label: 'About Us', path: '/about' },
+  { label: 'Who We Are', path: '/about' },
   { label: 'Clients & Cases', path: '/case-studies' },
   { label: 'Careers', path: '/careers' },
   { label: 'Contact', path: '/contact' },
@@ -34,12 +34,12 @@ export default function Footer() {
         <div className="container">
           <div className="footer__cta-inner">
             <div className="footer__cta-text">
-              <h2>Ready to modernize your institution?</h2>
-              <p>Schedule a consultation with our enterprise solutions team.</p>
+              <h2>Digital transformation, powered by AI.</h2>
+              <p>25+ years building mission-critical systems for government, education, mining, energy and healthcare.</p>
             </div>
             <div className="footer__cta-actions">
-              <Link to="/enquiry" className="btn btn--white btn--lg">
-                Request Demo
+              <Link to="/contact" className="btn btn--white btn--lg">
+                Talk to us
                 <ArrowRight size={16} />
               </Link>
             </div>
@@ -57,7 +57,7 @@ export default function Footer() {
                 <img src="/images/logo_text.png" alt="Eksper Technologies" />
               </Link>
               <p className="footer__tagline">
-                Enterprise campus management & e-Governance infrastructure for India's premier institutions since 2000.
+                25+ years building mission-critical systems for government, education, mining, energy and healthcare.
               </p>
 
               <div className="footer__hq">
@@ -74,23 +74,23 @@ export default function Footer() {
                 </div>
                 <div className="footer__hq-row">
                   <Mail size={14} />
-                  <a href="mailto:support@ekspertechnologies.in">support@ekspertechnologies.in</a>
+                  <a href="mailto:info@ekspertech.com">info@ekspertech.com</a>
                 </div>
               </div>
             </div>
 
             {/* Links Columns */}
             <div className="footer__links-col">
-              <h4 className="footer__col-title">Solutions</h4>
-              {SOLUTIONS.map((item) => (
-                <Link key={item.path} to={item.path} className="footer__link">{item.label}</Link>
+              <h4 className="footer__col-title">Sectors</h4>
+              {SECTORS.map((item) => (
+                <Link key={item.label} to={item.path} className="footer__link">{item.label}</Link>
               ))}
             </div>
 
             <div className="footer__links-col">
               <h4 className="footer__col-title">Services</h4>
               {SERVICES.map((item) => (
-                <Link key={item.path} to={item.path} className="footer__link">{item.label}</Link>
+                <Link key={item.label} to={item.path} className="footer__link">{item.label}</Link>
               ))}
             </div>
 
@@ -99,9 +99,6 @@ export default function Footer() {
               {COMPANY.map((item) => (
                 <Link key={item.path} to={item.path} className="footer__link">{item.label}</Link>
               ))}
-              <a href="/downloads" className="footer__link">
-                Downloads <ArrowUpRight size={12} />
-              </a>
             </div>
           </div>
 

@@ -1,374 +1,348 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  CheckCircle2, 
-  Play, 
-  Building2, 
-  Stethoscope, 
-  GraduationCap, 
-  Server, 
-  Brain, 
-  ShieldCheck, 
-  Layers,
-  ChevronRight
-} from 'lucide-react';
-import VideoModal from '../components/VideoModal';
+import { ArrowRight, Check } from 'lucide-react';
 import './HomePage.css';
 
 export default function HomePage() {
-  const [videoOpen, setVideoOpen] = useState(false);
-  const [activePillar, setActivePillar] = useState(0);
-  const [visibleSections, setVisibleSections] = useState(new Set());
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  const clientStripRef = useRef(null);
 
-  // Intersection Observer for scroll animations
+  // Staggered scroll-in for client logos
   useEffect(() => {
+    const strip = clientStripRef.current;
+    if (!strip) return;
+    const items = strip.querySelectorAll('.client-strip__item');
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => new Set([...prev, entry.target.id]));
-          }
-        });
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          items.forEach((el, i) => {
+            setTimeout(() => el.classList.add('client-strip__item--visible'), i * 90);
+          });
+          observer.disconnect();
+        }
       },
-      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+      { threshold: 0.3 }
     );
-
-    document.querySelectorAll('[data-animate]').forEach((el) => observer.observe(el));
+    observer.observe(strip);
     return () => observer.disconnect();
   }, []);
 
-  const pillars = [
-    {
-      icon: <Building2 size={20} />,
-      tag: 'State e-Governance',
-      title: 'State Universities & Public Governance',
-      desc: 'Turnkey digital governance for public universities — state-wide admissions, confidential examinations, CBCS, and statutory-compliant finance platforms.',
-      image: '/images/editorial/hero_campus.jpg',
-      stats: [
-        { value: '26,000+', label: 'Students governed' },
-        { value: '76', label: 'PG departments' },
-        { value: '120', label: 'Affiliated colleges' },
-      ],
-      features: [
-        'State-wide online admissions & web counselling',
-        'Central Records Branch (CRB) barcode logistics — 1-hour retrieval',
-        'Complete university lifecycle: entrance to convocation',
-        'Audit-ready double-entry finance with CAG compliance',
-      ],
-      link: '/solutions#e-governance',
-      caseStudy: '/case-studies#uom',
-    },
-    {
-      icon: <Stethoscope size={20} />,
-      tag: 'Healthcare & AI',
-      title: 'Medical Universities & Clinical AI',
-      desc: 'High-security medical university administration, multi-phase NEET counselling engines, and AI-driven clinical research for precision diagnostics.',
-      image: '/images/editorial/medical_institution.jpg',
-      stats: [
-        { value: '15,000+', label: 'Medical seats managed' },
-        { value: '12', label: 'AI diagnostic models' },
-        { value: '100%', label: 'Cryptographic degrees' },
-      ],
-      features: [
-        'Medical admissions & merit ranking engine (MBBS, BDS, AYUSH)',
-        'AI-driven radiology & pathology anomaly detection',
-        'NLP for EHR extraction & clinical document indexing',
-        'Tamper-proof medical degrees with QR verification',
-      ],
-      link: '/ai-healthcare',
-      caseStudy: '/case-studies#mu',
-    },
-    {
-      icon: <GraduationCap size={20} />,
-      tag: 'Higher Education',
-      title: 'Autonomous Colleges & Campus Networks',
-      desc: 'Agile campus management for autonomous colleges, multi-branch school networks, smart-card campuses, and complete K-12 school ERP.',
-      image: '/images/editorial/college_classroom.jpg',
-      stats: [
-        { value: '250+', label: 'Exam sessions' },
-        { value: '50,000+', label: 'Smart cards issued' },
-        { value: 'CBCS', label: 'Fully automated' },
-      ],
-      features: [
-        'Choice Based Credit System with elective allocation',
-        'Confidential exam grading with dummy number masking',
-        'Smart card campus — RFID, turnstiles, fee gateways',
-        'K-12 parent portal, SMS alerts, GPS bus telemetry',
-      ],
-      link: '/solutions#college',
-      caseStudy: '/case-studies#ksv',
-    },
-  ];
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const services = [
-    {
-      icon: <Server size={20} />,
-      title: 'Cloud Infrastructure',
-      desc: 'High-concurrency autoscaling for peak admission and result days. AWS, Azure, and on-premise setups.',
-      link: '/cloud-services',
-    },
-    {
-      icon: <Brain size={20} />,
-      title: 'AI Healthcare Lab',
-      desc: 'Machine learning research for radiology anomaly detection and automated clinical record parsing.',
-      link: '/ai-healthcare',
-    },
-    {
-      icon: <Layers size={20} />,
-      title: 'Data Migration',
-      desc: 'Cleansing legacy databases, deduplicating records, and building reliable real-time API integrations.',
-      link: '/services#sw-int-mig',
-    },
-    {
-      icon: <ShieldCheck size={20} />,
-      title: 'Tamper-Proof Certificates',
-      desc: 'Cryptographically signed degrees with encrypted QR codes for instant global employer verification.',
-      link: '/services#temper_proof',
-    },
-  ];
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (formData.name && (formData.email || formData.phone)) {
+      setFormSubmitted(true);
+    }
+  };
 
-
-  const clients = [
-    { name: 'University of Mysore', logo: '/images/editorial/mysore_university.jpg' },
-    { name: 'Mangalore University', logo: '/images/mangalore_university_logo.png' },
-    { name: 'Telangana State ITI', logo: '/images/iti_logo.png' },
-    { name: 'Dr. NTR University', logo: '/images/ntr-university-logo.jpg' },
-    { name: 'GNITS Hyderabad', logo: '/images/gnits_logo.png' },
-    { name: 'KSV University', logo: '/images/kadi-client.jpg' },
-  ];
-
-  const currentPillar = pillars[activePillar];
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    const contactElem = document.getElementById('contact');
+    if (contactElem) {
+      contactElem.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <div className="home">
-      <VideoModal isOpen={videoOpen} onClose={() => setVideoOpen(false)} />
-
-      {/* ===== HERO ===== */}
-      <section className="hero">
-        <div className="container">
-          <div className="hero__layout">
-            <div className="hero__content">
-              <div className="hero__eyebrow">
-                <span className="hero__dot" />
-                Enterprise ERP & Infrastructure
-              </div>
-
-              <h1 className="hero__title">
-                The digital foundation for India's leading enterprises.
-              </h1>
-
-              <p className="hero__desc">
-                From state-wide educational e-governance to mining telemetry, healthcare AI, and robust e-commerce platforms—we engineer mission-critical software for every sector.
-              </p>
-
-              <div className="hero__actions">
-                <Link to="/solutions" className="btn btn--primary btn--lg">
-                  Explore Solutions
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-
-              {/* Metric pills */}
-              <div className="hero__metrics">
-                <div className="hero__metric">
-                  <span className="hero__metric-value">24+ Years</span>
-                  <span className="hero__metric-label">Operational Excellence</span>
-                </div>
-                <div className="hero__metric-divider" />
-                <div className="hero__metric">
-                  <span className="hero__metric-value">50+</span>
-                  <span className="hero__metric-label">Enterprise Modules</span>
-                </div>
-                <div className="hero__metric-divider" />
-                <div className="hero__metric">
-                  <span className="hero__metric-value">100%</span>
-                  <span className="hero__metric-label">Statutory Compliant</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="hero__visual-bento">
-              {/* Top Left: Enterprise Dashboard */}
-              <div className="bento-item bento-item--main">
-                <img src="/images/editorial/platform_dashboard.jpg" alt="Enterprise Dashboard" />
-                <div className="bento-label">
-                  <div className="bento-label-dot" style={{ background: 'var(--ember)' }} />
-                  <span>State e-Governance</span>
-                </div>
-              </div>
-
-              {/* Top Right: University */}
-              <div className="bento-item bento-item--vertical">
-                <img src="/images/editorial/mysore_university.jpg" alt="University Campus" />
-                <div className="bento-label">
-                  <div className="bento-label-dot" style={{ background: '#3b82f6' }} />
-                  <span>Higher Education</span>
-                </div>
-              </div>
-
-              {/* Bottom: Medical/Healthcare */}
-              <div className="bento-item bento-item--horizontal">
-                <img src="/images/editorial/medical_institution.jpg" alt="Medical Research" />
-                <div className="bento-label">
-                  <div className="bento-label-dot" style={{ background: '#10b981' }} />
-                  <span>Clinical AI & Healthcare</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Client logos */}
-          <div className="hero__logos" id="hero-logos" data-animate>
-            <span className="hero__logos-label">Trusted by India's premier institutions</span>
-            <div className="hero__logos-row">
-              {clients.map((c, i) => (
-                <div key={i} className="hero__logo-item">
-                  <img src={c.logo} alt={c.name} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PILLARS ===== */}
-      <section className="section section--beige" id="pillars" data-animate>
-        <div className="container">
-          <div className="section-eyebrow">Specialized Platforms</div>
-          <h2 className="section-title">Built for India's regulatory & campus scale</h2>
-          <p className="section-subtitle" style={{ marginBottom: 48 }}>
-            Three purpose-built suites designed around statutory compliance, not generic one-size-fits-all software.
+    <div className="home-v2">
+      {/* 1. HERO */}
+      <section className="home-hero">
+        <div className="container container--narrow">
+          <h1 className="home-hero__title">
+            Digital transformation, powered by AI.
+          </h1>
+          <p className="home-hero__sub">
+            25+ years building mission-critical systems for government, education, mining, energy and healthcare.
           </p>
+          <div className="home-hero__cta">
+            <a href="#contact" onClick={scrollToContact} className="btn btn--primary btn--lg">
+              Talk to us
+              <ArrowRight size={16} />
+            </a>
+          </div>
+        </div>
 
-          {/* Pillar tabs */}
-          <div className="pillars__tabs">
-            {pillars.map((p, i) => (
-              <button
-                key={i}
-                type="button"
-                className={`pillars__tab ${activePillar === i ? 'pillars__tab--active' : ''}`}
-                onClick={() => setActivePillar(i)}
-              >
-                <span className="pillars__tab-icon">{p.icon}</span>
+        {/* Ripple Wave Field (Upper half visible only, no orb) */}
+        <div className="hero-ripple-field" aria-hidden="true">
+          <div className="ripple-ring"></div>
+          <div className="ripple-ring"></div>
+          <div className="ripple-ring"></div>
+          <div className="ripple-ring"></div>
+        </div>
+      </section>
+
+      {/* 2. CLIENT STRIP (Logos only, no heading, no caption) */}
+      <section className="client-strip-section" aria-label="Clients">
+        <div className="container">
+          <div className="client-strip" ref={clientStripRef}>
+            {/* NMDC */}
+            <div className="client-strip__item" title="NMDC">
+              <svg className="client-logo" viewBox="0 0 140 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="5" width="28" height="28" rx="4" fill="#003366" />
+                <path d="M7 25L14 11L18 20L22 14L25 25" stroke="#ffffff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="21" cy="11" r="2" fill="#E05A2B" />
+                <text x="38" y="25" fontFamily="'Outfit', 'Inter', sans-serif" fontSize="19" fontWeight="800" fill="currentColor" letterSpacing="0.06em">NMDC</text>
+              </svg>
+            </div>
+
+            {/* Greenko */}
+            <div className="client-strip__item" title="Greenko">
+              <svg className="client-logo" viewBox="0 0 140 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="19" r="12" fill="#059669" fillOpacity="0.15" />
+                <path d="M12 24C12 18 16 13 22 13C22 19 18 24 12 24Z" fill="#059669" />
+                <path d="M14 20C17 18 19 16 20 14" stroke="#ffffff" strokeWidth="1.2" strokeLinecap="round" />
+                <text x="36" y="24" fontFamily="'Inter', sans-serif" fontSize="18" fontWeight="700" fill="currentColor" letterSpacing="-0.02em">greenko</text>
+              </svg>
+            </div>
+
+            {/* Education Client: University of Mysore */}
+            <div className="client-strip__item" title="University of Mysore">
+              <div className="client-logo-combo">
+                <img src="/images/Mysore_University_logo.png" alt="University of Mysore" className="client-logo-img" />
+                <span className="client-logo-text">University of Mysore</span>
+              </div>
+            </div>
+
+            {/* Interwell Health */}
+            <div className="client-strip__item" title="Interwell Health">
+              <svg className="client-logo" viewBox="0 0 170 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="19" r="11" stroke="#0284C7" strokeWidth="2.5" />
+                <circle cx="20" cy="19" r="7" stroke="#0D9488" strokeWidth="2" />
+                <text x="36" y="24" fontFamily="'Inter', sans-serif" fontSize="16" fontWeight="600" fill="currentColor" letterSpacing="-0.01em">
+                  interwell <tspan fontWeight="400" fill="#0284C7">health</tspan>
+                </text>
+              </svg>
+            </div>
+
+            {/* Geisinger */}
+            <div className="client-strip__item" title="Geisinger">
+              <svg className="client-logo" viewBox="0 0 135 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 10H16M11 10V28M8 28H14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <text x="24" y="24" fontFamily="'Inter', sans-serif" fontSize="18" fontWeight="700" fill="currentColor" letterSpacing="-0.03em">Geisinger</text>
+              </svg>
+            </div>
+
+            {/* CVS Health */}
+            <div className="client-strip__item" title="CVS Health">
+              <svg className="client-logo" viewBox="0 0 145 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 14L10 20L16 14L12 10L10 12L8 10L4 14Z" fill="#CC0000" />
+                <text x="22" y="23" fontFamily="'Inter', sans-serif" fontSize="17" fontWeight="800" fill="currentColor" letterSpacing="-0.02em">
+                  CVS<tspan fontWeight="400">Health</tspan>
+                </text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. WHAT WE DO */}
+      <section className="section section--stone" id="what-we-do">
+        <div className="container">
+          <div className="section-eyebrow">Capabilities</div>
+          <h2 className="section-title">What we do</h2>
+          <div className="four-cards-grid">
+            <div className="simple-card">
+              <h3 className="simple-card__title">Digital Transformation</h3>
+              <p className="simple-card__line">Modernising legacy systems into platforms that work.</p>
+            </div>
+
+            <div className="simple-card">
+              <h3 className="simple-card__title">Data & AI</h3>
+              <p className="simple-card__line">Data platforms, analytics and AI built into operations, not bolted on.</p>
+            </div>
+
+            <div className="simple-card">
+              <h3 className="simple-card__title">Enterprise Platforms</h3>
+              <p className="simple-card__line">ERP, e-Governance and campus management at institutional scale.</p>
+            </div>
+
+            <div className="simple-card">
+              <h3 className="simple-card__title">Run & Support</h3>
+              <p className="simple-card__line">We stay on after go-live.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. WHERE WE WORK */}
+      <section className="section section--warm" id="where-we-work">
+        <div className="container">
+          <div className="section-eyebrow">Sectors</div>
+          <h2 className="section-title">Where we work</h2>
+          <div className="five-cards-grid">
+            <div className="simple-card">
+              <h3 className="simple-card__title">Government & e-Governance</h3>
+              <p className="simple-card__line">State departments and public institutions.</p>
+            </div>
+
+            <div className="simple-card">
+              <h3 className="simple-card__title">Education</h3>
+              <p className="simple-card__line">ERP and campus management for schools, colleges and institutions.</p>
+            </div>
+
+            <div className="simple-card">
+              <h3 className="simple-card__title">Mining</h3>
+              <p className="simple-card__line">NMDC and the public-sector mining ecosystem.</p>
+            </div>
+
+            <div className="simple-card">
+              <h3 className="simple-card__title">Energy</h3>
+              <p className="simple-card__line">Technology platforms and infrastructure for energy operations.</p>
+            </div>
+
+            <div className="simple-card">
+              <h3 className="simple-card__title">Healthcare</h3>
+              <p className="simple-card__line">Data and AI for US payers and provider organisations.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. SELECTED WORK */}
+      <section className="section section--stone" id="selected-work">
+        <div className="container">
+          <div className="section-intro">
+            <div className="section-eyebrow">Track Record</div>
+            <h2 className="section-title">Selected work</h2>
+          </div>
+
+          <div className="work-list">
+            <article className="work-row">
+              <div className="work-client">
+                <span className="work-index">01</span>
                 <div>
-                  <span className="pillars__tab-title">{p.tag}</span>
-                  <span className="pillars__tab-subtitle">{p.title}</span>
+                  <strong className="work-name">NMDC</strong>
+                  <span className="work-sector">Mining & Public Sector</span>
                 </div>
-              </button>
-            ))}
-          </div>
-
-          {/* Active pillar detail */}
-          <div className="pillars__detail" key={activePillar}>
-            <div className="pillars__image-col">
-              <div className="pillars__image-wrap">
-                <img src={currentPillar.image} alt={currentPillar.title} className="pillars__photo" />
               </div>
-              <div className="pillars__stats">
-                {currentPillar.stats.map((s, i) => (
-                  <div key={i} className="pillars__stat">
-                    <span className="pillars__stat-value">{s.value}</span>
-                    <span className="pillars__stat-label">{s.label}</span>
-                  </div>
-                ))}
+              <div className="work-copy">
+                <p>
+                  <b className="work-label">Problem</b> — Production dispatch, weighbridge capture, and statutory filings operated through disconnected spreadsheets and manual logs.
+                </p>
+                <p>
+                  <b className="work-label work-label--accent">What changed</b> — Centralized telemetry, automated weighbridge data acquisition, and real-time statutory reporting across production units.
+                </p>
               </div>
-            </div>
+            </article>
 
-            <div className="pillars__info-col">
-              <div className="chip chip--ember">{currentPillar.tag}</div>
-              <h3 className="pillars__detail-title">{currentPillar.title}</h3>
-              <p className="pillars__detail-desc">{currentPillar.desc}</p>
-
-              <ul className="pillars__features">
-                {currentPillar.features.map((f, i) => (
-                  <li key={i} className="pillars__feature">
-                    <CheckCircle2 size={16} className="pillars__check" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="pillars__actions">
-                <Link to={currentPillar.link} className="btn btn--primary">
-                  Explore Suite
-                  <ArrowRight size={14} />
-                </Link>
-                <Link to={currentPillar.caseStudy} className="btn btn--ghost">
-                  Read Case Study
-                  <ArrowRight size={14} className="btn-arrow" />
-                </Link>
+            <article className="work-row">
+              <div className="work-client">
+                <span className="work-index">02</span>
+                <div>
+                  <strong className="work-name">Greenko</strong>
+                  <span className="work-sector">Energy & Utilities</span>
+                </div>
               </div>
-            </div>
+              <div className="work-copy">
+                <p>
+                  <b className="work-label">Problem</b> — Operational data from distributed renewable generation assets was fragmented across disparate plant-level systems.
+                </p>
+                <p>
+                  <b className="work-label work-label--accent">What changed</b> — Unified generation telemetry and asset performance data into a single real-time operational platform.
+                </p>
+              </div>
+            </article>
+
+            <article className="work-row">
+              <div className="work-client">
+                <span className="work-index">03</span>
+                <div>
+                  <strong className="work-name">US Healthcare</strong>
+                  <span className="work-sector">Healthcare & Clinical AI</span>
+                </div>
+              </div>
+              <div className="work-copy">
+                <p>
+                  <b className="work-label">Problem</b> — Clinical, EHR, and claims data resided in disconnected systems, delaying risk stratification and care team workflows.
+                </p>
+                <p>
+                  <b className="work-label work-label--accent">What changed</b> — Built FHIR-compliant ingestion pipelines and automated cohort analytics integrated directly into care management operations.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      {/* ===== SERVICES ===== */}
-      <section className="section" id="services-overview" data-animate>
+      {/* 6. CONTACT */}
+      <section className="contact-section" id="contact">
         <div className="container">
-          <div className="section-header--center">
-            <div className="section-eyebrow" style={{ justifyContent: 'center' }}>Engineering Capabilities</div>
-            <h2 className="section-title">Beyond campus software</h2>
-            <p className="section-subtitle" style={{ marginBottom: 56 }}>
-              Specialized infrastructure services that back every deployment.
-            </p>
-          </div>
-
-          <div className="services__grid">
-            {services.map((s, i) => (
-              <Link key={i} to={s.link} className="service-card">
-                <div className="service-card__icon">{s.icon}</div>
-                <h4 className="service-card__title">{s.title}</h4>
-                <p className="service-card__desc">{s.desc}</p>
-                <span className="service-card__link">
-                  Learn more <ArrowRight size={14} className="btn-arrow" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* ===== PLATFORM OVERVIEW ===== */}
-      <section className="section" id="platform" data-animate>
-        <div className="container">
-          <div className="platform__layout">
-            <div className="platform__text">
-              <div className="section-eyebrow">Platform Architecture</div>
-              <h2 className="section-title">One database.<br />Every campus function.</h2>
-              <p className="section-subtitle" style={{ marginBottom: 32 }}>
-                A single centralized database architecture eliminates data silos, ensures real-time consistency, and simplifies compliance audits across every department.
+          <div className="contact-wrap">
+            <div className="contact-heading">
+              <div className="section-eyebrow">Get in touch</div>
+              <h2 className="contact-title">Talk to us.</h2>
+              <p className="contact-sub">
+                Talk directly with our engineering and leadership team.
               </p>
-
-              <div className="platform__stack">
-                <div className="platform__layer">
-                  <span className="platform__layer-tag">Presentation</span>
-                  <span className="platform__layer-desc">Device-independent responsive web & mobile portal</span>
-                </div>
-                <div className="platform__layer platform__layer--highlight">
-                  <span className="platform__layer-tag">Logic & Services</span>
-                  <span className="platform__layer-desc">Spring Framework, Groovy & Grails microservices</span>
-                </div>
-                <div className="platform__layer">
-                  <span className="platform__layer-tag">Persistence</span>
-                  <span className="platform__layer-desc">Hibernate ORM with role-based encryption & audit trail</span>
-                </div>
+              <div className="contact-direct">
+                <span className="contact-direct__label">Email directly</span>
+                <a href="mailto:info@ekspertech.com" className="contact-direct__link">
+                  info@ekspertech.com
+                  <ArrowRight size={14} />
+                </a>
               </div>
-
-              <Link to="/solutions" className="btn btn--primary" style={{ marginTop: 32 }}>
-                Technical Deep-Dive
-                <ArrowRight size={14} />
-              </Link>
             </div>
 
-            <div className="platform__visual">
-              <img 
-                src="/images/editorial/platform_dashboard.jpg" 
-                alt="Enterprise platform dashboard" 
-                className="platform__image"
-              />
+            <div className="contact-action-area">
+              {formSubmitted ? (
+                <div className="contact-success-banner">
+                  <Check size={22} className="contact-success__check" />
+                  <div>
+                    <h4>Message received</h4>
+                    <p>Thank you. We will get back to you shortly.</p>
+                  </div>
+                </div>
+              ) : (
+                <form className="contact-form-refined" onSubmit={handleFormSubmit}>
+                  <div className="form-fields-grid">
+                    <label className="form-field-unit">
+                      <span>Name</span>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Your name"
+                        required
+                      />
+                    </label>
+
+                    <label className="form-field-unit">
+                      <span>Email</span>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="name@company.com"
+                        required
+                      />
+                    </label>
+
+                    <label className="form-field-unit">
+                      <span>Phone</span>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="+91 or international"
+                      />
+                    </label>
+                  </div>
+
+                  <div className="form-submit-row">
+                    <button type="submit" className="btn btn--primary btn--lg contact-btn-refined">
+                      Submit
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </div>

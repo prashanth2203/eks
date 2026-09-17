@@ -1,221 +1,244 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import './CaseStudiesPage.css';
 
-const CATEGORIES = [
+const FEATURED_CASES = [
   {
-    title: 'State Universities & Government',
-    clients: [
-      { name: 'University of Mysore', logo: '/images/editorial/mysore_university.jpg' },
-      { name: 'Mangalore University', logo: '/images/mangalore_university_logo.png' },
-      { name: 'Telangana State ITI (DET)', logo: '/images/iti_logo.png' },
-      { name: 'State Secretariat CRB (GAD)', logo: '/images/gad-logo.jpg' },
-    ],
+    id: 'nmdc',
+    client: 'NMDC',
+    sector: 'Mining & Public Sector',
+    problem: 'Production dispatch, weighbridge capture, and statutory filings operated through disconnected spreadsheets and manual logs.',
+    whatChanged: 'Centralized telemetry, automated weighbridge data acquisition, and real-time statutory reporting across production units.',
+    highlights: ['Automated weighbridge integration', 'Digital dispatch pass system', 'Statutory compliance reporting'],
   },
   {
-    title: 'Health Sciences & Medical',
-    clients: [
-      { name: 'Dr. NTR University of Health Sciences', logo: '/images/ntr-university-logo.jpg' },
-    ],
+    id: 'greenko',
+    client: 'Greenko',
+    sector: 'Energy & Utilities',
+    problem: 'Operational data from distributed renewable generation assets was fragmented across disparate plant-level systems.',
+    whatChanged: 'Unified generation telemetry and asset performance data into a single real-time operational platform.',
+    highlights: ['Multi-site asset telemetry', 'Real-time performance dashboards', 'Operational data consolidation'],
   },
   {
-    title: 'Autonomous Colleges & Universities',
-    clients: [
-      { name: 'Kadi Sarva Vishwavidyalaya (KSV)', logo: '/images/kadi-client.jpg' },
-      { name: 'GNITS Hyderabad', logo: '/images/gnits_logo.png' },
-    ],
-  },
-  {
-    title: 'Industry & Enterprise',
-    clients: [
-      { name: 'Ganges International', logo: '/images/ganges-client.jpg' },
-    ],
+    id: 'us-healthcare',
+    client: 'US Healthcare Engagement',
+    sector: 'Healthcare & Clinical AI',
+    problem: 'Clinical, EHR, and claims data resided in disconnected systems, delaying risk stratification and care team workflows.',
+    whatChanged: 'Built FHIR-compliant ingestion pipelines and automated cohort analytics integrated directly into care management operations.',
+    highlights: ['FHIR data ingestion pipelines', 'Automated cohort risk tracking', 'Care team operational integration'],
   },
 ];
 
-const CASES = [
+const INSTITUTIONAL_CASES = [
   {
     id: 'uom',
-    institution: 'University of Mysore',
-    logo: '/images/editorial/mysore_university.jpg',
-    location: 'Mysore, Karnataka',
-    type: 'State University e-Governance',
-    challenge: 'Unifying 76 postgraduate departments, 120 affiliated colleges, and 26,000+ students under a single digital governance platform.',
-    solution: 'Deployed a comprehensive university management system covering admissions, examinations, CBCS, PhD management, finance, and Central Records Branch (CRB) file tracking.',
-    outcomes: [
-      'Single centralized database across all departments and colleges',
-      'Automated confidential examinations with dummy number masking',
-      'CRB barcode file tracking — guaranteed 1-hour retrieval',
-      'Fully compliant with UGC and state government audit requirements',
-    ],
-    stats: [
-      { value: '26,000+', label: 'Students' },
-      { value: '76', label: 'PG Departments' },
-      { value: '120', label: 'Affiliated Colleges' },
-    ],
+    client: 'University of Mysore',
+    sector: 'Higher Education & State University Governance',
+    problem: 'Administrative operations across 70+ postgraduate departments and 100+ affiliated colleges operated through disjointed manual files, causing weeks-long bottlenecks in admissions, examination processing, and records retrieval.',
+    whatChanged: 'Deployed centralized university governance suite unifying student lifecycle management, barcode-driven confidential examination processing with masked dummy grading, and CAG-audit-ready double-entry finance.',
+    highlights: ['70+ PG Departments', '100+ Affiliated Colleges', 'Barcode Dummy Number Masking', 'CAG Audit-Ready Double Entry'],
   },
   {
-    id: 'mu',
-    institution: 'Mangalore University',
-    logo: '/images/mangalore_university_logo.png',
-    location: 'Mangalore, Karnataka',
-    type: 'University Web Portal',
-    challenge: 'Building a comprehensive web portal for university-wide academic administration and student services.',
-    solution: 'End-to-end web portal covering application workflows, admission processing, and academic management across all postgraduate courses.',
-    outcomes: [
-      'Complete digital application and admission workflow',
-      'Multi-department course management system',
-      'Automated notifications and status tracking',
-      'Compliant with all academic guidelines and regulations',
-    ],
-    stats: [
-      { value: '40+', label: 'Departments' },
-      { value: '15,000+', label: 'Students' },
-      { value: '100%', label: 'Digital Workflow' },
-    ],
+    id: 'ksv-colleges',
+    client: 'Kadi Sarva Vishwavidyalaya (KSV) & Autonomous Colleges',
+    sector: 'Autonomous University & Multi-College ERP',
+    problem: 'Multi-faculty university structure needed to support complex Choice Based Credit System (CBCS) electives, faculty workload distribution, and semester evaluations without error-prone spreadsheet tallies.',
+    whatChanged: 'Implemented an end-to-end autonomous institute ERP orchestrating CBCS elective allocation, automated hall ticket generation, double-blind evaluation workflows, and digital degree verification.',
+    highlights: ['Choice Based Credit System (CBCS)', 'Double-Blind Grading', 'Automated Hall Tickets & Seating', 'DigiLocker / NAD Compatibility'],
   },
   {
-    id: 'ksv',
-    institution: 'Kadi Sarva Vishwavidyalaya',
-    logo: '/images/kadi-client.jpg',
-    location: 'Gujarat',
-    type: 'Autonomous University ERP',
-    challenge: 'Automating 250+ examination sessions, inventory management, and campus operations for an autonomous university.',
-    solution: 'Comprehensive ERP with examination scheduling, asset inventory tracking, student information system, and automated reporting.',
-    outcomes: [
-      '250+ automated exam schedules per academic cycle',
-      'Complete asset and inventory management',
-      'Real-time student performance dashboards',
-      'Integrated finance and fee collection',
-    ],
-    stats: [
-      { value: '250+', label: 'Exam Sessions' },
-      { value: '100%', label: 'Automated' },
-      { value: '5x', label: 'Faster Processing' },
-    ],
-  },
-  {
-    id: 'gnits',
-    institution: 'GNITS Hyderabad',
-    logo: '/images/gnits_logo.png',
-    location: 'Hyderabad, Telangana',
-    type: 'Autonomous College Management',
-    challenge: 'Managing autonomous engineering college operations with smart card campus integration.',
-    solution: 'Deployed college management suite with smart card campus, RFID integration, autonomous elective engines, and student portals.',
-    outcomes: [
-      'Smart card enabled campus with RFID library and turnstiles',
-      'Autonomous examination and grading system',
-      'Student and parent mobile portals',
-      'Integrated fee payment gateway',
-    ],
-    stats: [
-      { value: '5,000+', label: 'Students' },
-      { value: 'RFID', label: 'Smart Campus' },
-      { value: '100%', label: 'Autonomous' },
-    ],
+    id: 'state-det',
+    client: 'State Technical Education & Polytechnic Directorate (DET)',
+    sector: 'Statewide Admissions & Web Counselling',
+    problem: 'Multi-round statewide admission counselling across 100+ polytechnic institutions suffered from server crashes and verification backlogs during peak candidate seat allocation cycles.',
+    whatChanged: 'Engineered a high-throughput web counselling engine handling simultaneous statewide candidate verification, rank-based choice filling, and real-time seat allocations under statutory reservation quotas.',
+    highlights: ['50,000+ Simultaneous Allocations', 'Multi-Round Web Counselling', 'Statutory Quota Validation Engine', 'Zero-Downtime Concurrency'],
   },
 ];
 
 export default function CaseStudiesPage() {
   return (
-    <div>
+    <div className="case-studies-page">
       <section className="page-hero">
         <div className="container">
-          <div className="page-hero__eyebrow">Clients & Success Stories</div>
-          <h1 className="page-hero__title">Trusted by India's premier enterprises.</h1>
+          <div className="page-hero__eyebrow">Selected Work</div>
+          <h1 className="page-hero__title">Mission-critical delivery track record.</h1>
           <p className="page-hero__desc">
-            Discover the state governments, universities, and private enterprises that rely on our mission-critical software.
+            Two lines each — the problem, what changed. Real systems operating in production across mining, energy, healthcare, and government.
           </p>
         </div>
       </section>
 
-      {/* Clients Grid */}
+      {/* Featured 3 Cases */}
       <section className="section">
         <div className="container">
-          <div className="section-eyebrow" style={{ marginBottom: 40 }}>Our Client Network</div>
-          {CATEGORIES.map((cat, i) => (
-            <div key={i} style={{ marginBottom: i < CATEGORIES.length - 1 ? 56 : 0 }}>
-              <h3 style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--ink-muted)', marginBottom: 20 }}>{cat.title}</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
-                {cat.clients.map((c, j) => (
-                  <div key={j} style={{
-                    display: 'flex', alignItems: 'center', gap: 16, padding: '20px 24px',
-                    background: 'var(--stone-50)', borderRadius: 'var(--r-lg)',
-                    border: '1px solid transparent', transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--stone-200)'; e.currentTarget.style.background = 'var(--white)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'transparent'; e.currentTarget.style.background = 'var(--stone-50)'; }}
-                  >
-                    <img src={c.logo} alt={c.name} style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 'var(--r-sm)', flexShrink: 0 }} />
-                    <span style={{ fontFamily: 'var(--font-display)', fontSize: '0.9375rem', fontWeight: 600, color: 'var(--ink)' }}>{c.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Detailed Case Studies */}
-      <section className="section section--beige">
-        <div className="container">
-          <div className="section-eyebrow" style={{ marginBottom: 40 }}>Detailed Case Studies</div>
-          <div className="cases__list">
-            {CASES.map((c, i) => (
-              <article key={c.id} id={c.id} className="case-card">
-                <div className="case-card__header">
-                  <img src={c.logo} alt={c.institution} className="case-card__logo" />
+          <div className="section-eyebrow" style={{ marginBottom: 32 }}>Primary Engagements</div>
+          <div className="featured-cases-stack" style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+            {FEATURED_CASES.map((c) => (
+              <div
+                key={c.id}
+                style={{
+                  background: 'var(--white)',
+                  border: '1px solid var(--stone-200)',
+                  borderRadius: 'var(--r-lg)',
+                  padding: 'clamp(24px, 4vw, 36px)',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid var(--stone-100)' }}>
                   <div>
-                    <h3 className="case-card__institution">{c.institution}</h3>
-                    <span className="case-card__meta">{c.location} · {c.type}</span>
+                    <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--ember)', marginBottom: 4 }}>
+                      {c.sector}
+                    </span>
+                    <h2 style={{ fontSize: '1.75rem', margin: 0 }}>{c.client}</h2>
                   </div>
                 </div>
 
-                <div className="case-card__body">
-                  <div className="case-card__section">
-                    <h4>Challenge</h4>
-                    <p>{c.challenge}</p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, marginBottom: 24 }}>
+                  <div style={{ background: 'var(--stone-50)', padding: '20px', borderRadius: 'var(--r-md)' }}>
+                    <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--ink-faint)', marginBottom: 8 }}>
+                      The Problem
+                    </span>
+                    <p style={{ fontSize: '0.9375rem', color: 'var(--ink-secondary)', lineHeight: 1.6, margin: 0 }}>
+                      {c.problem}
+                    </p>
                   </div>
-                  <div className="case-card__section">
-                    <h4>Solution</h4>
-                    <p>{c.solution}</p>
-                  </div>
-                  <div className="case-card__section">
-                    <h4>Key Outcomes</h4>
-                    <ul className="case-card__outcomes">
-                      {c.outcomes.map((o, j) => (
-                        <li key={j}>
-                          <CheckCircle2 size={14} style={{ color: 'var(--ember)', flexShrink: 0, marginTop: 2 }} />
-                          <span>{o}</span>
-                        </li>
-                      ))}
-                    </ul>
+
+                  <div style={{ background: 'var(--stone-50)', padding: '20px', borderRadius: 'var(--r-md)', borderLeft: '3px solid var(--ember)' }}>
+                    <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--ember)', marginBottom: 8 }}>
+                      What Changed
+                    </span>
+                    <p style={{ fontSize: '0.9375rem', color: 'var(--ink)', lineHeight: 1.6, margin: 0 }}>
+                      {c.whatChanged}
+                    </p>
                   </div>
                 </div>
 
-                <div className="case-card__stats">
-                  {c.stats.map((s, j) => (
-                    <div key={j} className="case-card__stat">
-                      <span className="case-card__stat-value">{s.value}</span>
-                      <span className="case-card__stat-label">{s.label}</span>
-                    </div>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                  {c.highlights.map((h, i) => (
+                    <span key={i} style={{ fontSize: '0.8125rem', padding: '6px 14px', background: 'var(--stone-100)', borderRadius: 'var(--r-full)', color: 'var(--ink-secondary)', fontWeight: 500 }}>
+                      {h}
+                    </span>
                   ))}
                 </div>
-              </article>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section section--beige">
-        <div className="container" style={{ textAlign: 'center', maxWidth: 600 }}>
-          <h2 className="section-title">See it in action</h2>
-          <p className="section-subtitle" style={{ margin: '0 auto 32px' }}>
-            Schedule a live walkthrough of our platform with your institution's specific requirements.
+      {/* Institutional & Campus Section */}
+      <section className="section section--stone" id="institutional-campus">
+        <div className="container">
+          <div className="section-eyebrow" style={{ marginBottom: 12 }}>Institutional & Campus Track Record</div>
+          <h2 className="section-title" style={{ marginBottom: 12 }}>Institutional & Campus</h2>
+          <p className="section-subtitle" style={{ maxWidth: 760, marginBottom: 36 }}>
+            Proven higher education ERP, state admission counselling, and autonomous campus management platforms delivered at multi-college and state-wide scale.
           </p>
-          <Link to="/enquiry" className="btn btn--primary btn--lg">
-            Request Demo <ArrowRight size={14} />
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
+            {INSTITUTIONAL_CASES.map((h) => (
+              <div
+                key={h.id}
+                style={{
+                  background: 'var(--white)',
+                  border: '1px solid var(--stone-200)',
+                  borderRadius: 'var(--r-lg)',
+                  padding: '28px 24px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  boxShadow: '0 4px 16px -4px rgba(0, 0, 0, 0.04)',
+                }}
+              >
+                <div style={{ marginBottom: 16, paddingBottom: 12, borderBottom: '1px solid var(--stone-100)' }}>
+                  <span
+                    style={{
+                      display: 'block',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      color: 'var(--ember)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.07em',
+                      marginBottom: 6,
+                    }}
+                  >
+                    {h.sector}
+                  </span>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'var(--ink)' }}>
+                    {h.client}
+                  </h3>
+                </div>
+
+                <div style={{ marginBottom: 16 }}>
+                  <span
+                    style={{
+                      display: 'block',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.06em',
+                      color: 'var(--ink-faint)',
+                      marginBottom: 4,
+                    }}
+                  >
+                    The Problem
+                  </span>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--ink-secondary)', lineHeight: 1.6, margin: 0 }}>
+                    {h.problem}
+                  </p>
+                </div>
+
+                <div style={{ marginBottom: 20, borderLeft: '2.5px solid var(--ember)', paddingLeft: 12 }}>
+                  <span
+                    style={{
+                      display: 'block',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.06em',
+                      color: 'var(--ember)',
+                      marginBottom: 4,
+                    }}
+                  >
+                    What Changed
+                  </span>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--ink)', lineHeight: 1.6, margin: 0 }}>
+                    {h.whatChanged}
+                  </p>
+                </div>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 'auto', paddingTop: 12 }}>
+                  {h.highlights.map((tag, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        fontSize: '0.75rem',
+                        padding: '4px 10px',
+                        background: 'var(--stone-100)',
+                        borderRadius: 'var(--r-full)',
+                        color: 'var(--ink-secondary)',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section">
+        <div className="container" style={{ textAlign: 'center', maxWidth: 600 }}>
+          <h2 className="section-title">Discuss your platform requirements</h2>
+          <p className="section-subtitle" style={{ margin: '0 auto 32px' }}>
+            Speak directly with our engineering leadership about your systems and operational goals.
+          </p>
+          <Link to="/contact" className="btn btn--primary btn--lg">
+            Talk to us <ArrowRight size={14} />
           </Link>
         </div>
       </section>

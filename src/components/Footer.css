@@ -5,7 +5,34 @@
 /* CTA Band */
 .footer__cta {
   background-color: var(--stone-950);
-  padding: 64px 0;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(194, 65, 12, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, rgba(49, 95, 125, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, #0c0a09 0%, #1a1614 100%);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle noise texture via SVG data URI */
+.footer__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Top ember accent line */
+.footer__cta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(194, 65, 12, 0.6) 30%, rgba(194, 65, 12, 0.6) 70%, transparent 100%);
 }
 
 .footer__cta-inner {
@@ -13,6 +40,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 40px;
+  position: relative;
+  z-index: 2;
 }
 
 .footer__cta-text h2 {
@@ -22,7 +51,7 @@
 }
 
 .footer__cta-text p {
-  color: var(--stone-300);
+  color: rgba(255, 255, 255, 0.55);
   font-size: 1rem;
 }
 
@@ -30,6 +59,8 @@
   display: flex;
   gap: 12px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 /* Main Footer */
